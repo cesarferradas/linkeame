@@ -1,0 +1,19 @@
+version: '3.6'
+services:
+  web:
+    env_file:
+      - .env
+    build: .
+    ports:
+      - '5000:5000'
+    volumes:
+      - .:/src
+      # prevents mapping host's node_modules to container
+      # see: https://stackoverflow.com/a/41035371
+      - /src/node_modules
+  mongo:
+    env_file:
+      - .env
+    image: mongo:4.2-bionic
+  redis:
+    image: redis
