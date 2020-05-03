@@ -5,8 +5,6 @@ const middleware = require('./middleware')
 
 const api = express.Router()
 
-api.use(middleware.rateLimit)
-
 api.route('/links')
   .post(middleware.requireAuth, (req, res, next) => {
     // TODO allow custom link codes

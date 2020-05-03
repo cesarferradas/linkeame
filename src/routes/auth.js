@@ -8,8 +8,6 @@ const User = require('../models/user')
 
 const auth = express.Router()
 
-auth.use(middleware.rateLimit)
-
 auth.route('/register')
   .post((req, res, next) => {
     const { email, password } = req.body
@@ -37,7 +35,7 @@ auth.route('/register')
   })
 
 auth.route('/login')
-  .post((req, res, next) => {
+  .post(middleware.rateLimit, (req, res, next) => {
     User.findOne({ email: req.body.email }, (err, user) => {
       if (err) {
         next({

@@ -48,7 +48,7 @@ const rateLimit = (req, res, next) => {
     if (val) {
       next({
         status: 429,
-        message: 'Too many requests',
+        message: 'Has excedido el numero de intentos, intenta en unos minutos',
       })
     } else {
       next()
