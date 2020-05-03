@@ -1,5 +1,5 @@
 {
-  "name": "facilink",
+  "name": "linkea-core",
   "version": "1.0.0",
   "description": "A URL shortener REST API",
   "main": "server.js",

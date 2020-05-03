@@ -1,4 +1,4 @@
-# facilink
+# linkea-core
 
 A URL shortening REST API.
 
