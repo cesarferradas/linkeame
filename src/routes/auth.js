@@ -10,14 +10,16 @@ const auth = express.Router()
 
 auth.route('/register')
   .post((req, res, next) => {
-    const { email, password } = req.body
+    const { name, email, password } = req.body
     if (!email || !password) {
       next({
         status: 400,
         message: 'Se necesita email y contraseña',
       })
     }
+
     const newUser = new User()
+    newUser.name = name || email.split('@')[0]
     newUser.email = email
     newUser.passwordHash = bcrypt.hashSync(req.body.password, config.saltRounds)
 
