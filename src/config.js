@@ -29,7 +29,7 @@ config.linkSize = 7
 config.mongoUrl = process.env.MONGODB_URI
 
 config.morgan = {
-  format: 'tiny',
+  format: 'combined',
 }
 
 config.port = process.env.PORT || 5000
@@ -37,13 +37,10 @@ config.port = process.env.PORT || 5000
 config.saltRounds = 10
 
 config.winston = {
-  level: 'debug',
+  level: 'info',
 }
 
 if (config.env === 'production') {
-  config.morgan.format = 'combined'
-  config.winston.level = 'info'
-
   config.cookies.domain = `*.${config.app.domain}`
   config.cookies.sameSite = 'lax'
   config.cookies.secure = true
