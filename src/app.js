@@ -24,7 +24,10 @@ mongoose.connect(config.mongoUrl, {
 
 app.use(bodyParser.json())
 app.use(cookieParser())
-app.use(cors({ origin: config.allowedOrigins }))
+app.use(cors({
+  credentials: true,
+  origin: config.allowedOrigins,
+}))
 app.use(helmet())
 app.use(morgan(config.morgan.format))
 

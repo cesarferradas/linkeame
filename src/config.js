@@ -19,8 +19,6 @@ config.jwt = {
 
 config.cookies = {
   maxAge: 1000 * 60 * 60 * 24,
-  domain: 'localhost',
-  sameSite: 'lax',
   secure: false,
 }
 
@@ -36,10 +34,6 @@ config.morgan = {
 
 config.port = process.env.PORT || 5000
 
-config.rateLimitTTL = process.env.RATE_LIMIT_TTL || 0
-
-config.redisUrl = process.env.REDIS_URL
-
 config.saltRounds = 10
 
 config.winston = {
@@ -49,8 +43,11 @@ config.winston = {
 if (config.env === 'production') {
   config.morgan.format = 'combined'
   config.winston.level = 'info'
+
   config.cookies.domain = `*.${config.app.domain}`
+  config.cookies.sameSite = 'lax'
   config.cookies.secure = true
+
   config.allowedOrigins = [
     `http://${config.app.domain}`,
     `https://${config.app.domain}`,

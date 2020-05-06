@@ -3,12 +3,9 @@ const express = require('express')
 const jwt = require('jsonwebtoken')
 
 const config = require('../config')
-const middleware = require('./middleware')
 const User = require('../models/user')
 
 const auth = express.Router()
-
-auth.use(middleware.rateLimit)
 
 auth.route('/register')
   .post((req, res, next) => {
