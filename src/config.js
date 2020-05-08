@@ -5,6 +5,11 @@ config.app = {
   name: process.env.APP_NAME,
 }
 
+config.availableDomains = [
+  'linkea.me',
+  'facil.ink',
+]
+
 config.allowedOrigins = [
   'http://localhost:3000',
 ]

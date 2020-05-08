@@ -27,11 +27,10 @@ const UserSchema = new mongoose.Schema({
   },
 }, { timestamps: true })
 
-// TODO add stripe ID, payments table
-
 UserSchema.options.toJSON = {
   transform: (doc, ret) => ({
     id: ret._id,
+    name: ret.name,
     email: ret.email,
     is_verified: ret.isVerified,
     plan: ret.plan,

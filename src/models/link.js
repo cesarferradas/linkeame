@@ -8,6 +8,11 @@ const LinkSchema = new mongoose.Schema({
     type: String,
     default: () => nanoid(config.linkSize),
   },
+  domain: {
+    type: String,
+    enum: config.availableDomains,
+    default: config.availableDomains[0],
+  },
   url: {
     type: String,
     required: true,
@@ -28,9 +33,10 @@ const LinkSchema = new mongoose.Schema({
 
 LinkSchema.options.toJSON = {
   transform: (doc, ret) => ({
+    domain: ret.domain,
     code: ret._id,
-    click_count: ret.clickCount,
     url: ret.url,
+    click_count: ret.clickCount,
     created_at: ret.createdAt,
   }),
 }

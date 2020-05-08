@@ -10,7 +10,12 @@ base.route('/')
 
 base.route('/:linkId')
   .get((req, res) => {
-    Link.findById(req.params.linkId, (err, link) => {
+    let domain = req.hostname
+    if (!config.availableDomains.includes(domain)) {
+      [domain] = config.availableDomains
+    }
+
+    Link.findOne({ _id: req.params.linkId, domain }, (err, link) => {
       if (err || !link) {
         // TODO render error page
         res.send('Not found')
