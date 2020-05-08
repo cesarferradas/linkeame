@@ -8,10 +8,6 @@ const LinkSchema = new mongoose.Schema({
     type: String,
     default: () => nanoid(config.linkSize),
   },
-  click_count: {
-    type: Number,
-    default: 0,
-  },
   url: {
     type: String,
     required: true,

@@ -15,7 +15,7 @@ base.route('/:linkId')
         // TODO render error page
         res.send('Not found')
       } else {
-        link.count += 1
+        link.clickCount += 1
         link.save()
         res.redirect(link.url)
       }

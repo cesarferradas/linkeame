@@ -1,6 +1,7 @@
 const express = require('express')
 
 const Link = require('../models/link')
+const User = require('../models/user')
 const middleware = require('./middleware')
 
 const api = express.Router()
@@ -33,6 +34,20 @@ api.route('/links')
         })
       } else {
         res.json(links)
+      }
+    })
+  })
+
+api.route('/users')
+  .get(middleware.requireAuth, (req, res, next) => {
+    User.findById(req.user.sub, (err, user) => {
+      if (err || !user) {
+        next({
+          message: 'No encontrado',
+          error: err,
+        })
+      } else {
+        res.json(user)
       }
     })
   })
