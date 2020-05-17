@@ -12,6 +12,13 @@ form {
   width: 320px;
 }
 
+button {
+  color: white;
+  background-color: #0098F2;
+  border-radius: 8px;
+  padding: 8px 15px;
+}
+
 .error {
   color: red;
 }
