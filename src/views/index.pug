@@ -1,0 +1,8 @@
+extends default
+
+block content
+  form(method='POST')
+    input(name='_csrf' type='hidden' value=csrfToken) 
+    input(name='url' required type='text' placeholder='URL largo') 
+    input(name='code' type='text' placeholder='Codigo corto (opcional)') 
+    button(type='submit') Acortar

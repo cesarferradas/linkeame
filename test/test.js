@@ -4,8 +4,6 @@ const request = require('supertest')
 const app = require('../src/app')
 const config = require('../src/config')
 const Link = require('../src/models/link')
-const User = require('../src/models/user')
-
 
 before((done) => {
   mongoose.connect(config.mongoUrl, {
@@ -18,9 +16,7 @@ before((done) => {
 })
 
 after((done) => {
-  Link.deleteMany({}, () => {
-    User.deleteMany({}, done)
-  })
+  Link.deleteMany({}, done)
 })
 
 describe('Base root', () => {
@@ -42,61 +38,5 @@ describe('Base redirect', () => {
     request(app)
       .get('/foobar')
       .expect(200, done)
-  })
-})
-
-describe('/api/links', () => {
-  it('requires authentication', (done) => {
-    request(app)
-      .post('/api/links')
-      .expect(401, done)
-  })
-  xit('creates a link', (done) => {
-    // TODO send valid JWT to prevent 401
-    request(app)
-      .post('/api/links')
-      .expect(201, done)
-  })
-})
-
-describe('api/auth/register', () => {
-  it('creates a user', (done) => {
-    request(app)
-      .post('/api/auth/register')
-      .send({
-        email: 'user1@facil.ink',
-        password: 'password',
-      })
-      .expect(201, done)
-  })
-  xit('fails if user already exists', (done) => {
-    request(app)
-      .post('/api/auth/register')
-      .send({
-        email: 'user@facil.ink',
-        password: 'password',
-      })
-      .expect(400, done)
-  })
-})
-
-describe('api/auth/login', () => {
-  xit('returns a JWT', (done) => {
-    request(app)
-      .post('/api/auth/login')
-      .send({
-        email: 'user@facil.ink',
-        password: 'password',
-      })
-      .expect(200, done)
-  })
-  xit('returns unauthorized if credentials are incorrect', (done) => {
-    request(app)
-      .post('/api/auth/login')
-      .send({
-        email: 'user@facil.ink',
-        password: 'wrongpassword',
-      })
-      .expect(401, done)
   })
 })

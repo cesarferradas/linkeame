@@ -5,27 +5,11 @@ config.app = {
   name: process.env.APP_NAME,
 }
 
-config.availableDomains = [
-  'linkea.me',
-  'facil.ink',
-]
-
 config.allowedOrigins = [
   'http://localhost:3000',
 ]
 
 config.env = process.env.NODE_ENV
-
-config.jwt = {
-  secret: process.env.JWT_SECRET,
-  issuer: config.app.domain,
-  expires: '24h',
-}
-
-config.cookies = {
-  maxAge: 1000 * 60 * 60 * 24,
-  secure: false,
-}
 
 // see https://zelark.github.io/nano-id-cc/
 // before changing the link size
@@ -34,24 +18,15 @@ config.linkSize = 7
 config.mongoUrl = process.env.MONGODB_URI
 
 config.morgan = {
-  format: 'combined',
+  format: 'dev',
 }
 
 config.port = process.env.PORT || 5000
 
-config.saltRounds = 10
-
-config.winston = {
-  level: 'info',
-}
-
 if (config.env === 'production') {
-  config.cookies.domain = `*.${config.app.domain}`
-  config.cookies.sameSite = 'lax'
-  config.cookies.secure = true
-
   config.allowedOrigins = [
     `http://${config.app.domain}`,
     `https://${config.app.domain}`,
   ]
+  config.morgan.format = 'combined'
 }
