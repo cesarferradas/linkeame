@@ -3,6 +3,9 @@ body {
   padding: 10px;
 }
 
+a {
+  text-decoration: none;
+}
 button {
   border-radius: 8px;
   padding: 8px 15px;

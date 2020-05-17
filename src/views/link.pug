@@ -1,10 +1,13 @@
 extends default
 
+block head
+  meta(name='robots' content='noindex')
+
 block content
   if success
-    h3 ¡Tu enlace fue acortado correctamente!
+    h4 ¡Tu enlace fue acortado!
   p El enlace largo:
   p.indent: a(href=longUrl) #{longUrl}
-  p Fue acortado a:
+  p Tiene el siguiente enlace corto:
   p.indent: a(href=`http://${shortUrl}`) #{shortUrl}
   p Ha sido accedido <strong>#{clickCount}</strong> veces.

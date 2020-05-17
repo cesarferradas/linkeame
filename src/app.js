@@ -68,6 +68,7 @@ app.route('/link/:linkId')
         res.render('error', { msg: 'Enlace no existe' })
       } else {
         res.render('link', {
+          pageTitle: link._id,
           longUrl: link.url,
           shortUrl: `${config.app.domain}/${link._id}`,
           clickCount: link.clickCount,

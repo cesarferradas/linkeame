@@ -1,24 +1,19 @@
 const mongoose = require('mongoose')
 const { nanoid } = require('nanoid')
 
+const validation = require('../utils/validation')
 const config = require('../config')
 
 const LinkSchema = new mongoose.Schema({
   _id: {
     type: String,
     default: () => nanoid(config.linkSize.default),
-    validate: {
-      validator: (val) => val.length >= config.linkSize.min && val.length <= config.linkSize.max,
-      message: () => `Codigo corto debe tener entre ${config.linkSize.min} y ${config.linkSize.max} caracteres`,
-    },
+    validate: validation.code,
   },
   url: {
     type: String,
     required: true,
-    validate: {
-      validator: (val) => /^https?:\/\/(www)?[^ "]+\.+[^ "]+$/.test(val),
-      message: (props) => `'${props.value}' no es un enlace valido`,
-    },
+    validate: validation.url,
   },
   clickCount: {
     type: Number,

@@ -5,12 +5,12 @@ block content
     p.error #{msg}
   form.create-form(method='POST')
     input(name='_csrf' type='hidden' value=csrfToken) 
-    p Ingresa un enlace largo para acortarlo
+    p Ingresa un enlace largo para acortarlo:
     input#url(name='url' required type='text') 
-    p Codigo personalizado (opcional)
+    p Codigo personalizado (opcional):
     tt https://#{websiteDomain}/
     input#code(name='code' type='text') 
     br
-    small (puede contener letras y numeros)
+    small (puede contener letras y números)
     p
     button(type='submit') Acortar
