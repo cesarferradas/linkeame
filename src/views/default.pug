@@ -4,11 +4,12 @@ html
     if pageTitle
       title #{websiteName} | enlace #{pageTitle}
     title #{websiteName}
+    meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1')
-    meta(name='robots' content="noindex")
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    meta(name='description' content='Acorta tus enlaces largos')
+    link(href='/style.css' rel='stylesheet' type='text/css')
     block head
-    style
-      include style.css
   body
     main
       block header
