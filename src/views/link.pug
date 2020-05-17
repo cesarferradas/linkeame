@@ -4,9 +4,9 @@ block head
   meta(name='robots' content='noindex')
 
 block content
-  if success
+  if !clickCount
     h4 ¡Tu enlace fue acortado!
-  p El enlace largo:
+  p El enlace original:
   p.indent: a(href=longUrl) #{longUrl}
   p Tiene el siguiente enlace corto:
   p.indent: a(href=`http://${shortUrl}`) #{shortUrl}

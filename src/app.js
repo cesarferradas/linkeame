@@ -40,14 +40,19 @@ app.use(express.static(path.join(__dirname, './static')))
 // Routes
 app.route('/')
   .get((req, res) => {
+    // TODO add a captcha
     res.render('index', { csrfToken: req.csrfToken() })
   })
 
   .post((req, res) => {
-    const newLink = new Link(req.body)
-    if (req.body.code) {
-      newLink._id = req.body.code
-    }
+    // TODO verify captcha
+    let { code, url } = req.body
+    code = code.trim()
+    if (!url.includes('http')) url = `http://${url}`
+
+    const newLink = new Link({ url })
+    if (code) newLink._id = code
+
     newLink.save((err, link) => {
       if (err) {
         const msg = err.errors && (err.errors.url || err.errors._id || 'No se pudo acortar')
@@ -56,7 +61,7 @@ app.route('/')
           msg,
         })
       } else {
-        res.redirect(`/link/${link.id}?s=1`)
+        res.redirect(`/link/${link.id}`)
       }
     })
   })
@@ -73,7 +78,6 @@ app.route('/link/:linkId')
           longUrl: link.url,
           shortUrl: `${config.app.domain}/${link._id}`,
           clickCount: link.clickCount,
-          success: req.query.s,
         })
       }
     })

@@ -4,6 +4,8 @@ const { nanoid } = require('nanoid')
 const validation = require('../utils/validation')
 const config = require('../config')
 
+// TODO add secret so people can see the link stats
+
 const LinkSchema = new mongoose.Schema({
   _id: {
     type: String,

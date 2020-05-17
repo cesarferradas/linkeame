@@ -11,8 +11,8 @@ const code = {
 }
 
 const url = {
-  validator: (val) => /^https?:\/\/(www)?[^ "]+\.+[^ "]+$/.test(val),
-  message: (props) => `'${props.value}' no es un enlace valido`,
+  validator: (val) => /^http?:\/\/(www)?[^ "]+\.+[^ "]+$/.test(val),
+  message: (props) => `El formato de '${props.value}' no es válido`,
 }
 
 module.exports = {
