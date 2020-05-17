@@ -11,7 +11,7 @@ const code = {
 }
 
 const url = {
-  validator: (val) => /^http?:\/\/(www)?[^ "]+\.+[^ "]+$/.test(val),
+  validator: (val) => val.includes('http') && val.includes('/') && val.includes('.'),
   message: (props) => `El formato de '${props.value}' no es válido`,
 }
 
