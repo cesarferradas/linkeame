@@ -4,24 +4,6 @@ A URL shortening service in Spanish.
 
 ## Install
 
-### With Docker
-
-1. Install [Docker](https://docs.docker.com/compose/install/)
-
-1. Create a `.env` file in the project root, and set your environment variables
-
-    ```shell
-    cp .example.env .env
-    ```
-
-1. Run app
-
-    ```shell
-    docker-compose up --build
-    ```
-
-### Manually
-
 1. Install [Node](https://nodejs.org/en/)
 
 1. Install [nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
