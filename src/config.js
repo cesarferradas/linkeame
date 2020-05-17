@@ -19,7 +19,7 @@ config.env = process.env.NODE_ENV
 config.linkSize = {
   default: 6,
   min: 5,
-  max: 10,
+  max: 30,
 }
 
 config.mongoUrl = process.env.MONGODB_URI
