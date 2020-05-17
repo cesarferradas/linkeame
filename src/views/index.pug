@@ -1,8 +1,16 @@
 extends default
 
 block content
-  form(method='POST')
+  if msg
+    p.error #{msg}
+  form.create-form(method='POST')
     input(name='_csrf' type='hidden' value=csrfToken) 
-    input(name='url' required type='text' placeholder='URL largo') 
-    input(name='code' type='text' placeholder='Codigo corto (opcional)') 
+    p Ingresa un enlace largo para acortarlo
+    input#url(name='url' required type='text') 
+    p Codigo personalizado (opcional)
+    tt https://#{websiteDomain}/
+    input#code(name='code' type='text') 
+    br
+    small (puede contener letras y numeros)
+    p
     button(type='submit') Acortar

@@ -12,7 +12,6 @@ before((done) => {
     useUnifiedTopology: true,
   }, done)
   // TODO seed DB
-  // TODO mock redis client
 })
 
 after((done) => {

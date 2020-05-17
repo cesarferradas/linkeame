@@ -15,6 +15,7 @@ const Link = require('./models/link')
 const app = express()
 
 app.locals.websiteName = config.app.name
+app.locals.websiteDomain = config.app.domain
 
 mongoose.connect(config.mongoUrl, {
   useCreateIndex: true,
@@ -42,23 +43,25 @@ app.route('/')
   })
 
   .post((req, res) => {
-    // TODO allow custom codes
     const newLink = new Link(req.body)
+    if (req.body.code) {
+      newLink._id = req.body.code
+    }
     newLink.save((err, link) => {
       if (err) {
+        const msg = err.errors && (err.errors.url || err.errors._id || 'No se pudo acortar')
         res.render('index', {
           csrfToken: req.csrfToken(),
-          error: 'No se pudo acortar el enlace',
+          msg,
         })
       } else {
-        res.redirect(`/l/${link.id}`)
+        res.redirect(`/link/${link.id}?s=1`)
       }
     })
   })
 
-app.route('/l/:linkId')
+app.route('/link/:linkId')
   .get((req, res) => {
-    console.log(req.params.linkId)
     Link.findById(req.params.linkId, (err, link) => {
       if (err || !link) {
         console.error(err)
@@ -68,6 +71,7 @@ app.route('/l/:linkId')
           longUrl: link.url,
           shortUrl: `${config.app.domain}/${link._id}`,
           clickCount: link.clickCount,
+          success: req.query.s,
         })
       }
     })

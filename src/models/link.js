@@ -6,14 +6,18 @@ const config = require('../config')
 const LinkSchema = new mongoose.Schema({
   _id: {
     type: String,
-    default: () => nanoid(config.linkSize),
+    default: () => nanoid(config.linkSize.default),
+    validate: {
+      validator: (val) => val.length >= config.linkSize.min && val.length <= config.linkSize.max,
+      message: () => `Codigo corto debe tener entre ${config.linkSize.min} y ${config.linkSize.max} caracteres`,
+    },
   },
   url: {
     type: String,
     required: true,
     validate: {
       validator: (val) => /^https?:\/\/(www)?[^ "]+\.+[^ "]+$/.test(val),
-      message: (props) => `${props.value} is not a valid URL`,
+      message: (props) => `'${props.value}' no es un enlace valido`,
     },
   },
   clickCount: {

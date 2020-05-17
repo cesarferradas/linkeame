@@ -1,9 +1,10 @@
 extends default
 
 block content
-  h3 ¡Tu enlace fue acortado correctamente!
+  if success
+    h3 ¡Tu enlace fue acortado correctamente!
   p El enlace largo:
-  p: a(href=longUrl) #{longUrl}
+  p.indent: a(href=longUrl) #{longUrl}
   p Fue acortado a:
-  p: a(href=`http://${shortUrl}`) #{shortUrl}
-  p Ha sido accedido #{clickCount} veces.
+  p.indent: a(href=`http://${shortUrl}`) #{shortUrl}
+  p Ha sido accedido <strong>#{clickCount}</strong> veces.
