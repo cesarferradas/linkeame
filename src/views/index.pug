@@ -3,12 +3,12 @@ extends default
 block content
   if msg
     p.error #{msg}
-  form.create-form(method='POST')
+  form(method='POST')
     input(name='_csrf' type='hidden' value=csrfToken) 
     p Enlace largo:
     input#url(name='url' required type='text') 
     p Codigo personalizado (opcional):
-    code https://linkea.me/
+    code https://#{websiteDomain}/
     input#code(name='code' type='text') 
     p
     button(type='submit') Acortar
