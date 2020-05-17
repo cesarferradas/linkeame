@@ -1,17 +1,15 @@
 body {
-  font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
   padding: 10px;
 }
 
-a {
+h1 a {
+  color: #0098F2;
   text-decoration: none;
 }
-button {
-  border-radius: 8px;
-  padding: 8px 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+
+form {
+  width: 320px;
 }
 
 .error {
@@ -22,15 +20,10 @@ button {
   margin: 1em 2em;
 }
 
-.create-form {
-  width: 320px;
-  padding: 6px;
-}
-
 #url {
   width: 280px;
 }
 
 #code {
-  width: 90px;
+  width: 140px;
 }
