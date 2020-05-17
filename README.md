@@ -1,6 +1,6 @@
-# linkea-core
+# linkeame
 
-A URL shortening REST API.
+A URL shortening service in Spanish.
 
 ## Install
 
