@@ -4,17 +4,17 @@ html
     if pageTitle
       title #{websiteName} | enlace #{pageTitle}
     else
-      title #{websiteName} | acortador de enlaces web
+      title #{websiteName} | acortador de enlaces web, acortador de URL
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1')
     meta(name='viewport' content='width=device-width, initial-scale=1')
-    meta(name='description' content='Acortador de enlaces web, acortador de URLs')
+    meta(name='description' content='Acortador de enlaces web, acortador de URL, URL con marca')
     link(href='/style.css' rel='stylesheet' type='text/css')
     block head
   body
     main
       block header
-        header.header
+        header
           h1: a(href='/') #{websiteName}
           p Acortador de enlaces web
           hr

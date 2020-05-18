@@ -5,9 +5,9 @@ block head
 
 block content
   if !clickCount
-    h4 ¡Tu enlace fue acortado!
+    h4 ¡Tu enlace ha sido acortado!
   p Enlace original:
   p: a(href=longUrl) #{longUrl}
   p Enlace corto:
   p: a(href=`http://${shortUrl}`) #{shortUrl}
-  p Ha sido accedido <strong>#{clickCount}</strong> veces.
+  p Número de clicks: <strong>#{clickCount}</strong>
