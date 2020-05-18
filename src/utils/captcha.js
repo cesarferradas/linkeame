@@ -8,7 +8,8 @@ const generateNumbers = () => ({
 
 const generateCode = (challenge) => {
   const p = captcha(100, 30, challenge)
-  p.color(0, 152, 242)
+  // p.color(0, 152, 242)
+  p.color(0, 97, 154)
   p.color(164, 221, 255)
   return p.getBase64()
 }

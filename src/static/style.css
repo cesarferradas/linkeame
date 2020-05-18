@@ -18,7 +18,7 @@ header {
 }
 
 a {
-  color: #0098F2;
+  color: #00619a;
   text-decoration: none;
 }
 
@@ -34,7 +34,7 @@ input {
 button {
   font-size: 16px;
   color: white;
-  background-color: #0098F2;
+  background-color: #00619a;
   border-radius: 8px;
   padding: 8px 15px;
   cursor: pointer;

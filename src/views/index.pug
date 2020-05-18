@@ -12,7 +12,7 @@ block content
     code #{websiteDomain}/
     input#code(name='code' type='text')
     p Verificación:
-    img(src=`data:image/jpeg;base64,${validationCode}`)
+    img(alt='Challenge' src=`data:image/jpeg;base64,${validationCode}`)
     input#challenge(name='challenge' required type='text')
     p
     button(type='submit') Acortar
