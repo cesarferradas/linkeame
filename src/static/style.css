@@ -22,6 +22,10 @@ h1 a {
   text-decoration: none;
 }
 
+p a {
+  word-break: break-all;
+}
+
 input {
   width: 95%;
   height: 20px;
