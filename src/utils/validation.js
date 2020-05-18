@@ -3,10 +3,10 @@ const config = require('../config')
 const code = {
   validator: (val) => (
     val.length >= config.linkSize.min && val.length <= config.linkSize.max
-      && /^[a-z0-9]+$/i.test(val)
+      && /^[a-zA-Z0-9_-]+$/i.test(val)
   ),
   message: () => (
-    `Codigo corto debe tener entre ${config.linkSize.min} y ${config.linkSize.max} letras y/o numeros`
+    `Codigo personalizado debe tener entre ${config.linkSize.min} y ${config.linkSize.max} letras y/o numeros`
   ),
 }
 

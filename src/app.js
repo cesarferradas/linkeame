@@ -56,12 +56,11 @@ app.route('/')
         msg: 'Verificación incorrecta',
       })
     } else {
-      let { code, url } = req.body
-      code = code.trim()
+      let { url } = req.body
       if (!url.includes('http')) url = `http://${url}`
 
       const newLink = new Link({ url })
-      if (code !== '') newLink._id = code
+      if (req.body.code) newLink._id = req.body.code
 
       newLink.save((err, link) => {
         if (err) {
