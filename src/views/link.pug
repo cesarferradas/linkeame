@@ -6,8 +6,8 @@ block head
 block content
   if !clickCount
     h4 ¡Tu enlace fue acortado!
-  p El enlace original:
-  p.indent: a(href=longUrl) #{longUrl}
-  p Tiene el siguiente enlace corto:
-  p.indent: a(href=`http://${shortUrl}`) #{shortUrl}
+  p Enlace original:
+  p: a(href=longUrl) #{longUrl}
+  p Enlace corto:
+  p: a(href=`http://${shortUrl}`) #{shortUrl}
   p Ha sido accedido <strong>#{clickCount}</strong> veces.
