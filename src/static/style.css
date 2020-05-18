@@ -12,11 +12,17 @@ form {
   width: 320px;
 }
 
+input {
+  width: 140px;
+  height: 20px;
+}
+
 button {
   color: white;
   background-color: #0098F2;
   border-radius: 8px;
   padding: 8px 15px;
+  cursor: pointer;
 }
 
 .error {
@@ -31,6 +37,9 @@ button {
   width: 280px;
 }
 
-#code {
-  width: 140px;
+#challenge {
+  width: 170px;
+  position: relative;
+  top: -10px;
+  left: 10px;
 }

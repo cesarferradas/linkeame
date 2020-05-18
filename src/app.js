@@ -10,6 +10,7 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 
 const config = require('./config')
+const captcha = require('./utils/captcha')
 const Link = require('./models/link')
 
 const app = express()
@@ -17,6 +18,7 @@ const app = express()
 app.locals.websiteName = config.app.name
 app.locals.websiteDomain = config.app.domain
 
+// Database
 mongoose.connect(config.mongoUrl, {
   useCreateIndex: true,
   useNewUrlParser: true,
@@ -40,30 +42,40 @@ app.use(express.static(path.join(__dirname, './static')))
 // Routes
 app.route('/')
   .get((req, res) => {
-    // TODO add a captcha
-    res.render('index', { csrfToken: req.csrfToken() })
+    res.render('index', {
+      ...captcha.generateChallenge(),
+      csrfToken: req.csrfToken(),
+    })
   })
 
   .post((req, res) => {
-    // TODO verify captcha
-    let { code, url } = req.body
-    code = code.trim()
-    if (!url.includes('http')) url = `http://${url}`
+    if (captcha.getChallenge(req.body._numbers) !== req.body.challenge) {
+      res.render('index', {
+        ...captcha.generateChallenge(),
+        csrfToken: req.csrfToken(),
+        msg: 'Verificación incorrecta',
+      })
+    } else {
+      let { code, url } = req.body
+      code = code.trim()
+      if (!url.includes('http')) url = `http://${url}`
 
-    const newLink = new Link({ url })
-    if (code) newLink._id = code
+      const newLink = new Link({ url })
+      if (code !== '') newLink._id = code
 
-    newLink.save((err, link) => {
-      if (err) {
-        const msg = err.errors && (err.errors.url || err.errors._id || 'No se pudo acortar')
-        res.render('index', {
-          csrfToken: req.csrfToken(),
-          msg,
-        })
-      } else {
-        res.redirect(`/link/${link.id}`)
-      }
-    })
+      newLink.save((err, link) => {
+        if (err) {
+          const msg = err.errors && (err.errors.url || err.errors._id || 'No se pudo acortar')
+          res.render('index', {
+            ...captcha.generateChallenge(),
+            csrfToken: req.csrfToken(),
+            msg,
+          })
+        } else {
+          res.redirect(`/link/${link.id}`)
+        }
+      })
+    }
   })
 
 app.route('/link/:linkId')
