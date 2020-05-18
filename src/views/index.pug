@@ -7,10 +7,10 @@ block content
     input(name='_csrf' type='hidden' value=csrfToken)
     input(name='_numbers' type='hidden' value=numbers)
     p Enlace largo:
-    input(name='url' required type='text')
+    input(name='url' required type='text' value=url)
     p Código personalizado (opcional):
     code #{websiteDomain}/
-    input#code(name='code' type='text')
+    input#code(name='code' type='text' value=code)
     p Verificación:
     img(alt='Challenge' src=`data:image/jpeg;base64,${validationCode}`)
     input#challenge(name='challenge' required type='text')

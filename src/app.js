@@ -51,6 +51,7 @@ app.route('/')
   .post((req, res) => {
     if (captcha.getChallenge(req.body._numbers) !== req.body.challenge) {
       res.render('index', {
+        ...req.body,
         ...captcha.generateChallenge(),
         csrfToken: req.csrfToken(),
         msg: 'Verificación incorrecta',
@@ -66,6 +67,7 @@ app.route('/')
         if (err) {
           const msg = err.errors && (err.errors.url || err.errors._id || 'No se pudo acortar')
           res.render('index', {
+            ...req.body,
             ...captcha.generateChallenge(),
             csrfToken: req.csrfToken(),
             msg,

@@ -53,7 +53,13 @@ footer {
 }
 
 .error {
+  background-color: #ffdddd;
+  border-radius: 8px;
   color: red;
+  font-weight: 500;
+  padding: 10px 0px;
+  text-align: center;
+  width: 100%;
 }
 
 #code {

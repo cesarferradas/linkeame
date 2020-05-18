@@ -6,13 +6,13 @@ const code = {
       && /^[a-zA-Z0-9_-]+$/i.test(val)
   ),
   message: () => (
-    `Codigo personalizado debe tener entre ${config.linkSize.min} y ${config.linkSize.max} letras y/o numeros`
+    `El código debe tener entre ${config.linkSize.min} y ${config.linkSize.max} letras y/o números`
   ),
 }
 
 const url = {
   validator: (val) => val.includes('http') && val.includes('/') && val.includes('.'),
-  message: (props) => `El formato de '${props.value}' no es válido`,
+  message: () => 'El formato del enlace largo no es válido',
 }
 
 module.exports = {
