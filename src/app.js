@@ -77,12 +77,22 @@ app.route('/')
     }
   })
 
+app.route('/contacto')
+  .get((req, res) => {
+    res.render('contact', { pageTitle: 'contacto' })
+  })
+
+app.route('/privacidad')
+  .get((req, res) => {
+    res.render('privacy', { pageTitle: 'privacidad' })
+  })
+
 app.route('/link/:linkId')
   .get((req, res) => {
     Link.findById(req.params.linkId, (err, link) => {
       if (err || !link) {
         console.error(err)
-        res.render('error', { msg: 'Enlace no existe' })
+        res.render('error', { msg: 'El URL ingresado no existe' })
       } else {
         res.render('link', {
           pageTitle: link._id,
@@ -99,18 +109,13 @@ app.route('/:linkId')
     Link.findById(req.params.linkId, (err, link) => {
       if (err || !link) {
         console.error(err)
-        res.render('error', { msg: 'Enlace no existe' })
+        res.render('error', { msg: 'El URL ingresado no existe' })
       } else {
         link.clickCount += 1
         link.save()
         res.redirect(link.url)
       }
     })
-  })
-
-app.route('*')
-  .all((req, res) => {
-    res.render('error', { msg: 'No encontrado' })
   })
 
 module.exports = app

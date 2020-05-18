@@ -11,7 +11,7 @@ html(lang='es')
     link(rel='manifest' href='/site.webmanifest')
     link(href='/style.css' rel='stylesheet' type='text/css')
     if pageTitle
-      title #{websiteName} | enlace #{pageTitle}
+      title #{websiteName} | #{pageTitle}
     else
       title #{websiteName} | acortador de enlaces web, acortador de URL
     block head
@@ -23,3 +23,7 @@ html(lang='es')
           p Acortador de enlaces web
           hr
       block content
+
+    footer.center
+      hr
+      block footer

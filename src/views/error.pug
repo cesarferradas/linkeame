@@ -1,5 +1,9 @@
 extends default
 
 block content
-  h4 Error :(
-  p #{msg}
+  div.center
+    h4 Hubo un error
+    p #{msg}
+
+block footer
+  a(href='/') ← volver al inicio

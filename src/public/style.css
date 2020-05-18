@@ -42,6 +42,16 @@ button {
   width: 100%;
 }
 
+footer {
+  padding-top: 20px;
+}
+
+.center {
+   position: relative;
+   width: 100%;
+   text-align: center;
+}
+
 .error {
   color: red;
 }
