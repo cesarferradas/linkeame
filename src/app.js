@@ -54,7 +54,7 @@ app.route('/')
         ...req.body,
         ...captcha.generateChallenge(),
         csrfToken: req.csrfToken(),
-        msg: 'Verificación incorrecta',
+        error: 'Verificación incorrecta',
       })
     } else {
       let { url } = req.body
@@ -65,7 +65,7 @@ app.route('/')
 
       newLink.save((err, link) => {
         if (err) {
-          const msg = (err.errors && (err.errors.url || err.errors._id))
+          const error = (err.errors && (err.errors.url || err.errors._id))
                       || (err.errmsg && err.errmsg.includes('duplicate') && 'El código personalizado no está disponible')
                       || 'No se pudo acortar el enlace, por favor intenta de nuevo'
 
@@ -73,7 +73,7 @@ app.route('/')
             ...req.body,
             ...captcha.generateChallenge(),
             csrfToken: req.csrfToken(),
-            msg,
+            error,
           })
         } else {
           res.redirect(`/link/${link.id}`)
@@ -84,17 +84,49 @@ app.route('/')
 
 app.route('/apoyo')
   .get((req, res) => {
-    res.render('support', { pageTitle: 'apoyo' })
+    res.render('support', { pageTitle: 'Apoyo' })
   })
 
 app.route('/contacto')
   .get((req, res) => {
-    res.render('contact', { pageTitle: 'contacto' })
+    res.render('contact', {
+      ...captcha.generateChallenge(),
+      csrfToken: req.csrfToken(),
+      pageTitle: 'Contacto',
+    })
+  })
+
+  .post((req, res) => {
+    if (captcha.getChallenge(req.body._numbers) !== req.body.challenge) {
+      res.render('contact', {
+        ...req.body,
+        ...captcha.generateChallenge(),
+        csrfToken: req.csrfToken(),
+        error: 'Verificación incorrecta',
+        pageTitle: 'Contacto',
+      })
+    } else if (!req.body.email || !req.body.message) {
+      res.render('contact', {
+        ...req.body,
+        ...captcha.generateChallenge(),
+        csrfToken: req.csrfToken(),
+        error: 'Se requiere completar el correo y el mensaje',
+        pageTitle: 'Contacto',
+      })
+    } else {
+      // TODO send email
+      res.render('contact', {
+        ...captcha.generateChallenge(),
+        csrfToken: req.csrfToken(),
+        pageTitle: 'Contacto',
+        error: 'No se pudo enviar el mensaje',
+      })
+    }
   })
 
 app.route('/privacidad')
   .get((req, res) => {
-    res.render('privacy', { pageTitle: 'privacidad' })
+    res.render('privacy', { pageTitle: 'Política de privacidad' })
   })
 
 app.route('/link/:linkId')
@@ -103,7 +135,7 @@ app.route('/link/:linkId')
       if (err) {
         console.error(err)
       } else if (!link) {
-        res.render('error', { msg: 'El URL ingresado no existe' })
+        res.render('error', { error: 'El URL ingresado no existe' })
       } else {
         res.render('link', {
           pageTitle: link._id,
@@ -121,7 +153,7 @@ app.route('/:linkId')
       if (err) {
         console.error(err)
       } else if (!link) {
-        res.render('error', { msg: 'El URL ingresado no existe' })
+        res.render('error', { error: 'El URL ingresado no existe' })
       } else {
         link.clickCount += 1
         link.save()

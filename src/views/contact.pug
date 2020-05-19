@@ -1,8 +1,15 @@
 extends default
 
 block content
-  p Para cualquier consulta, puedes mandar un correo a:
-  p: a(href=`mailto:contacto@${websiteDomain}`) contacto@#{websiteDomain}
-
-block footer
-  a(href='/') ← volver al inicio
+  form(method='POST')
+    input(name='_csrf' type='hidden' value=csrfToken)
+    input(name='_numbers' type='hidden' value=numbers)
+    p Correo electrónico
+    input(name='email' required type='email' value=email)
+    p Mensaje
+    textarea(name='message' required type='text' value=message)
+    p Verificación
+    img(alt='Challenge' src=`data:image/jpeg;base64,${validationCode}`)
+    input#challenge(name='challenge' required type='text')
+    p
+    button(type='submit') Enviar

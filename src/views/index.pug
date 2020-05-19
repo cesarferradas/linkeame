@@ -1,17 +1,15 @@
 extends default
 
 block content
-  if msg
-    p.error #{msg}
   form(method='POST')
     input(name='_csrf' type='hidden' value=csrfToken)
     input(name='_numbers' type='hidden' value=numbers)
-    p Enlace largo:
+    p Enlace largo
     input(name='url' required type='text' value=url)
-    p Código personalizado (opcional):
+    p Código personalizado (opcional)
     code #{websiteDomain}/
     input#code(name='code' type='text' value=code)
-    p Verificación:
+    p Verificación
     img(alt='Challenge' src=`data:image/jpeg;base64,${validationCode}`)
     input#challenge(name='challenge' required type='text')
     p
