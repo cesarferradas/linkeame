@@ -65,7 +65,10 @@ app.route('/')
 
       newLink.save((err, link) => {
         if (err) {
-          const msg = err.errors && (err.errors.url || err.errors._id || 'No se pudo acortar')
+          const msg = (err.errors && (err.errors.url || err.errors._id))
+                      || (err.errmsg && err.errmsg.includes('duplicate') && 'El código personalizado no está disponible')
+                      || 'No se pudo acortar el enlace, por favor intenta de nuevo'
+
           res.render('index', {
             ...req.body,
             ...captcha.generateChallenge(),
@@ -92,8 +95,9 @@ app.route('/privacidad')
 app.route('/link/:linkId')
   .get((req, res) => {
     Link.findById(req.params.linkId, (err, link) => {
-      if (err || !link) {
+      if (err) {
         console.error(err)
+      } else if (!link) {
         res.render('error', { msg: 'El URL ingresado no existe' })
       } else {
         res.render('link', {
@@ -109,8 +113,9 @@ app.route('/link/:linkId')
 app.route('/:linkId')
   .get((req, res) => {
     Link.findById(req.params.linkId, (err, link) => {
-      if (err || !link) {
+      if (err) {
         console.error(err)
+      } else if (!link) {
         res.render('error', { msg: 'El URL ingresado no existe' })
       } else {
         link.clickCount += 1
