@@ -82,6 +82,11 @@ app.route('/')
     }
   })
 
+app.route('/apoyo')
+  .get((req, res) => {
+    res.render('support', { pageTitle: 'apoyo' })
+  })
+
 app.route('/contacto')
   .get((req, res) => {
     res.render('contact', { pageTitle: 'contacto' })
