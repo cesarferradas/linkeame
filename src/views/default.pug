@@ -24,10 +24,12 @@ html(lang='es')
           hr
       if pageTitle
         h3.center #{pageTitle}
-      if error
-        p.msg.error #{error}
+      if msg:
+        p.msg #{msg}
       if success
         p.msg.success #{success}
+      if error
+        p.msg.error #{error}
       block content
 
     footer.center

@@ -5,11 +5,12 @@ block head
 
 block content
   if !clickCount
-    h4 ¡Tu enlace ha sido acortado!
+    p Para volver a esta página, guarda el siguiente enlace:
+    p: a(href=`https://${adminUrl}`) #{adminUrl}
   p Enlace original:
   p: a(href=longUrl) #{longUrl}
   p Enlace corto:
-  p: a(href=`http://${shortUrl}`) #{shortUrl}
+  p: a(href=`https://${shortUrl}`) #{shortUrl}
   p Número de clicks: <strong>#{clickCount}</strong>
 
 block footer

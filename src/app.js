@@ -43,18 +43,18 @@ app.use(express.static(path.join(__dirname, './public')))
 app.route('/')
   .get((req, res) => {
     res.render('index', {
-      ...captcha.generateChallenge(),
       csrfToken: req.csrfToken(),
+      ...captcha.generateChallenge(),
     })
   })
 
   .post((req, res) => {
     if (captcha.getChallenge(req.body._numbers) !== req.body.challenge) {
       res.render('index', {
-        ...req.body,
-        ...captcha.generateChallenge(),
         csrfToken: req.csrfToken(),
         error: 'Verificación incorrecta',
+        ...captcha.generateChallenge(),
+        ...req.body,
       })
     } else {
       let { url } = req.body
@@ -70,10 +70,10 @@ app.route('/')
                       || 'No se pudo acortar el enlace, por favor intenta de nuevo'
 
           res.render('index', {
-            ...req.body,
-            ...captcha.generateChallenge(),
             csrfToken: req.csrfToken(),
             error,
+            ...captcha.generateChallenge(),
+            ...req.body,
           })
         } else {
           res.redirect(`/link/${link.id}`)
@@ -98,13 +98,18 @@ app.route('/link/:linkId')
       if (err) {
         console.error(err)
       } else if (!link) {
-        res.render('error', { msg: 'El URL ingresado no existe' })
+        res.render('error', {
+          msg: 'El URL ingresado no existe',
+          pageTitle: 'Error',
+        })
       } else {
         res.render('link', {
-          pageTitle: link._id,
-          longUrl: link.url,
-          shortUrl: `${config.app.domain}/${link._id}`,
+          adminUrl: `${config.app.domain}/link/${link._id}`,
           clickCount: link.clickCount,
+          longUrl: link.url,
+          pageTitle: `Enlace ${link._id}`,
+          shortUrl: `${config.app.domain}/${link._id}`,
+          success: link.clickCount > 0 && '¡Enlace acortado!',
         })
       }
     })
@@ -116,7 +121,10 @@ app.route('/:linkId')
       if (err) {
         console.error(err)
       } else if (!link) {
-        res.render('error', { msg: 'El URL ingresado no existe' })
+        res.render('error', {
+          msg: 'El URL ingresado no existe',
+          pageTitle: 'Error',
+        })
       } else {
         link.clickCount += 1
         link.save()
