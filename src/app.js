@@ -109,7 +109,7 @@ app.route('/link/:linkId')
           longUrl: link.url,
           pageTitle: `Enlace ${link._id}`,
           shortUrl: `${config.app.domain}/${link._id}`,
-          success: link.clickCount > 0 && '¡Enlace acortado!',
+          success: link.clickCount === 0 && '¡Enlace acortado!',
         })
       }
     })
