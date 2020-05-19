@@ -84,44 +84,7 @@ app.route('/')
 
 app.route('/apoyo')
   .get((req, res) => {
-    res.render('support', { pageTitle: 'Apoyo' })
-  })
-
-app.route('/contacto')
-  .get((req, res) => {
-    res.render('contact', {
-      ...captcha.generateChallenge(),
-      csrfToken: req.csrfToken(),
-      pageTitle: 'Contacto',
-    })
-  })
-
-  .post((req, res) => {
-    if (captcha.getChallenge(req.body._numbers) !== req.body.challenge) {
-      res.render('contact', {
-        ...req.body,
-        ...captcha.generateChallenge(),
-        csrfToken: req.csrfToken(),
-        error: 'Verificación incorrecta',
-        pageTitle: 'Contacto',
-      })
-    } else if (!req.body.email || !req.body.message) {
-      res.render('contact', {
-        ...req.body,
-        ...captcha.generateChallenge(),
-        csrfToken: req.csrfToken(),
-        error: 'Se requiere completar el correo y el mensaje',
-        pageTitle: 'Contacto',
-      })
-    } else {
-      // TODO send email
-      res.render('contact', {
-        ...captcha.generateChallenge(),
-        csrfToken: req.csrfToken(),
-        pageTitle: 'Contacto',
-        error: 'No se pudo enviar el mensaje',
-      })
-    }
+    res.render('support', { pageTitle: 'Apoya al servicio' })
   })
 
 app.route('/privacidad')
@@ -135,7 +98,7 @@ app.route('/link/:linkId')
       if (err) {
         console.error(err)
       } else if (!link) {
-        res.render('error', { error: 'El URL ingresado no existe' })
+        res.render('error', { msg: 'El URL ingresado no existe' })
       } else {
         res.render('link', {
           pageTitle: link._id,
@@ -153,7 +116,7 @@ app.route('/:linkId')
       if (err) {
         console.error(err)
       } else if (!link) {
-        res.render('error', { error: 'El URL ingresado no existe' })
+        res.render('error', { msg: 'El URL ingresado no existe' })
       } else {
         link.clickCount += 1
         link.save()
