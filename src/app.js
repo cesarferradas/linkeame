@@ -107,7 +107,7 @@ app.route('/link/:linkId')
           adminUrl: `${config.app.domain}/link/${link._id}`,
           clickCount: link.clickCount,
           longUrl: link.url,
-          pageTitle: `Enlace ${link._id}`,
+          pageTitle: link._id,
           shortUrl: `${config.app.domain}/${link._id}`,
           success: link.clickCount === 0 && '¡Enlace acortado!',
         })

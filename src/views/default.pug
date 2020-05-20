@@ -16,12 +16,12 @@ html(lang='es')
       title #{websiteName} | Acortador de enlaces web, acortador de URLs
     block head
   body
-    main
+    header
+      h1: a(href='/') #{websiteName}
+      p Acortador de enlaces web
+      hr
       block header
-        header
-          h1: a(href='/') #{websiteName}
-          p Acortador de enlaces web
-          hr
+    main
       if pageTitle
         h3.center #{pageTitle}
       if msg
@@ -31,12 +31,10 @@ html(lang='es')
       if error
         p.msg.error #{error}
       block content
-
     footer.center
       hr
       small
         if pageTitle
           a(href='/') ← volver al inicio
-          br
         else
           block footer
