@@ -123,6 +123,11 @@ app.route('/apoyo')
     res.render('support', { pageTitle: 'Apoya al servicio' })
   })
 
+app.route('/faq')
+  .get((req, res) => {
+    res.render('faq', { pageTitle: 'Preguntas frecuentes' })
+  })
+
 app.route('/privacidad')
   .get((req, res) => {
     res.render('privacy', { pageTitle: 'Política de privacidad' })

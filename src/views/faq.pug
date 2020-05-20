@@ -1,0 +1,64 @@
+extends default
+
+block content
+  h4#como ¿Cómo funciona?
+  p
+    | Ingresa cualquier enlace largo en el formulario y será acortado a uno más
+    | pequeño.
+  p
+    | Cuando alguien visita el enlace corto, nosotros redireccionamos el
+    | tráfico al enlace original.
+  p
+    | Puedes ver los detalles de cualquier enlace corto agregando el texto
+    | "<code>/link</code>" detrás del código corto.
+  p Por ejemplo, si tu enlace corto es:
+  p: a(href='https://linkea.me/ejemplo') linkea.me/ejemplo
+  p Los detalles y las estadísticas se encuentran en:
+  p: a(href='https://linkea.me/link/ejemplo') linkea.me/link/ejemplo
+
+  h4#costo ¿Cuánto cuesta?
+  p
+    | Nada. El servicio es completamente gratuito y libre de anuncios
+    | publicitarios.
+  p
+    | Sin embargo, buscamos
+    a(href='/apoyo')  donaciones
+    |  voluntarias de nuestros usuarios para cubrir los costos operativos y
+    | mantener el sitio web activo.
+
+  h4#seguridad ¿Es seguro?
+  p
+    | Este sitio fue construido con las tecnologías más modernas de desarrollo
+    | web. Contamos con un proveedor de infraestructura (servidores, base de
+    | datos, etc) de primera clase.
+  p
+    | Todo el tráfico entre tu navegador web y el servidor es encriptado usando
+    | el protocolo criptográfico
+    a(href='http://linkea.me/tlswiki')  TLS
+    | , asi que nadie puede interceptar o modificar las conexiones.
+  p
+    | También contamos con un sistema de lista negra ("blacklist") con el cual
+    | podemos bloquear ciertos dominios de ser acortados con nuestro servicio si
+    | descubrimos que son sitios no deseados.
+  p
+    | Para reportar un enlace corto, ver la sección de contacto debajo.
+
+  h4#abuso ¿Cómo reporto un enlace?
+  p
+    | Para reportar un enlace de linkea.me, por favor enviar un correo
+    | electrónico a:
+  p: a(href='mailto:contacto@linkea.me')  contacto@linkea.me
+
+  h4#duplicado ¿Puede haber enlaces cortos duplicados?
+  p
+    | No. Antes de acortar un enlace, verificamos que el código corto sea
+    | válido y único.
+  p
+    | Una vez creado un enlace corto, ese código queda reservado y no se puede
+    | volver a usar para redireccionar a otro enlace largo.
+
+  h4#validacion ¿Se valida el enlace largo antes de acortarlo?
+  p
+    | Sí y no. Validamos el <i>formato</i> del enlace, pero no si es que la
+    | página web está activa. Es responsabilidad del usuario asegurar que el
+    | enlace largo esté activo.
