@@ -4,13 +4,12 @@ block head
   meta(name='robots' content='noindex')
 
 block content
-  p Enlace corto:
-  p: a(href=`https://${shortUrl}`) #{shortUrl}
-  p Enlace original:
+  p Enlace corto
+  p: a(href=shortUrlFull) #{shortUrl}
+  if qrData
+    p.b0 Código QR
+    img.center(alt='Código QR' src=qrData)
+  p Número de clicks
+  p: strong #{clickCount}
+  p Enlace original
   p: a(href=longUrl) #{longUrl}
-  p Número de clicks: <strong>#{clickCount}</strong>
-  if !clickCount
-    p
-      | Guarda la
-      a(href=`https://${adminUrl}`)  página actual
-      |  para ver estadisticas de tu enlace corto.

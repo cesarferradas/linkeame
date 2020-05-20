@@ -8,6 +8,7 @@ const express = require('express')
 const helmet = require('helmet')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
+const qrcode = require('qrcode')
 
 const config = require('./config')
 const captcha = require('./utils/captcha')
@@ -85,16 +86,6 @@ app.route('/')
     }
   })
 
-app.route('/apoyo')
-  .get((req, res) => {
-    res.render('support', { pageTitle: 'Apoya al servicio' })
-  })
-
-app.route('/privacidad')
-  .get((req, res) => {
-    res.render('privacy', { pageTitle: 'Política de privacidad' })
-  })
-
 app.route('/link/:linkId')
   .get((req, res) => {
     Link.findById(req.params.linkId, (err, link) => {
@@ -106,16 +97,35 @@ app.route('/link/:linkId')
           pageTitle: 'Error',
         })
       } else {
-        res.render('link', {
+        const data = {
           adminUrl: `${config.app.domain}/link/${link._id}`,
           clickCount: link.clickCount,
           longUrl: link.url,
           pageTitle: link._id,
           shortUrl: `${config.app.domain}/${link._id}`,
-          success: link.clickCount === 0 && '¡Enlace acortado!',
-        })
+          shortUrlFull: `http://${config.app.domain}/${link._id}`,
+          success: !link.clickCount && '¡Enlace acortado! Guarda esta página para volver a ver los siguientes detalles',
+        }
+        qrcode.toDataURL(data.shortUrlFull, { width: 200 })
+          .then((qrData) => {
+            res.render('link', { qrData, ...data })
+          })
+          .catch((qrError) => {
+            console.error(qrError)
+            res.render('link', data)
+          })
       }
     })
+  })
+
+app.route('/apoyo')
+  .get((req, res) => {
+    res.render('support', { pageTitle: 'Apoya al servicio' })
+  })
+
+app.route('/privacidad')
+  .get((req, res) => {
+    res.render('privacy', { pageTitle: 'Política de privacidad' })
   })
 
 app.route('/:linkId')

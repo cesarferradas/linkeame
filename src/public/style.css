@@ -59,6 +59,11 @@ footer {
    text-align: center;
 }
 
+.b0 {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
 .msg {
   border-radius: 8px;
   font-weight: 500;
