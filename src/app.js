@@ -57,11 +57,13 @@ app.route('/')
         ...req.body,
       })
     } else {
-      let { url } = req.body
-      if (!url.includes('http')) url = `http://${url}`
+      let { code, url } = req.body
+      code = code.trim()
+      url = url.trim()
+      if (!url.startsWith('http')) url = `http://${url}`
 
       const newLink = new Link({ url })
-      if (req.body.code) newLink._id = req.body.code
+      if (code) newLink._id = code
 
       newLink.save((err, link) => {
         if (err) {

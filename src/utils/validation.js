@@ -11,7 +11,7 @@ const code = {
 }
 
 const url = {
-  validator: (val) => val.includes('http') && val.includes('/') && val.includes('.'),
+  validator: (val) => /^https?:\/\/[a-zA-Z0-9]+.[a-zA-Z0-9]/i.test(val),
   message: () => 'El formato del enlace largo no es válido',
 }
 
