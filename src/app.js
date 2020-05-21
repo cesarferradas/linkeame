@@ -35,7 +35,7 @@ app.use(csrf({ cookie: true }))
 app.use(helmet())
 app.use(morgan(config.morgan.format))
 
-// Template engine
+// Views and static files
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, './views'))
 app.use(express.static(path.join(__dirname, './public')))
@@ -86,13 +86,13 @@ app.route('/')
     }
   })
 
-app.route('/link/:linkId')
+app.route(['/l/:linkId', '/link/:linkId'])
   .get((req, res) => {
     Link.findById(req.params.linkId, (err, link) => {
       if (err) {
         console.error(err)
       } else if (!link) {
-        res.render('error', {
+        res.status(404).render('error', {
           msg: 'El URL ingresado no existe',
           pageTitle: 'Error',
         })
@@ -133,13 +133,13 @@ app.route('/privacidad')
     res.render('privacy', { pageTitle: 'Política de privacidad' })
   })
 
-app.route('/:linkId')
+app.route(['/:linkId', '//:linkId'])
   .get((req, res) => {
     Link.findById(req.params.linkId, (err, link) => {
       if (err) {
         console.error(err)
       } else if (!link) {
-        res.render('error', {
+        res.status(404).render('error', {
           msg: 'El URL ingresado no existe',
           pageTitle: 'Error',
         })
