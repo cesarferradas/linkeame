@@ -75,8 +75,6 @@ app.route('/')
       })
     } else {
       if (!parsedUrl.protocol) url = `http://${url}`
-      console.log(url)
-      console.log(parsedUrl)
 
       const newLink = new Link({ url })
       if (code) newLink._id = code
