@@ -151,4 +151,12 @@ app.route(['/:linkId', '//:linkId'])
     })
   })
 
+app.route('*')
+  .get((req, res) => {
+    res.status(404).render('error', {
+      msg: 'El URL ingresado no existe',
+      pageTitle: 'Error',
+    })
+  })
+
 module.exports = app
