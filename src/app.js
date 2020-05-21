@@ -86,7 +86,7 @@ app.route('/')
     }
   })
 
-app.route(['/l/:linkId', '/link/:linkId'])
+app.route(['/l*/:linkId'])
   .get((req, res) => {
     Link.findById(req.params.linkId, (err, link) => {
       if (err) {
@@ -131,6 +131,11 @@ app.route('/faq')
 app.route('/privacidad')
   .get((req, res) => {
     res.render('privacy', { pageTitle: 'Política de privacidad' })
+  })
+
+app.route('/terminos')
+  .get((req, res) => {
+    res.render('terms', { pageTitle: 'Términos de uso' })
   })
 
 app.route(['/:linkId', '//:linkId'])

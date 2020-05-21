@@ -28,26 +28,39 @@ block content
 
   h4#seguridad ¿Es seguro?
   p
-    | Este sitio fue construido con las tecnologías más modernas de desarrollo
-    | web. Contamos con un proveedor de infraestructura (servidores, base de
-    | datos, etc) de primera clase.
+    | Como cualquier otro sitio web, es responsabilidad de los usuarios de
+    | internet tener cuidado al presionar cualquier enlace.
   p
-    | Todo el tráfico entre tu navegador web y el servidor es encriptado usando
-    | el protocolo criptográfico
-    a(href='http://linkea.me/tlswiki')  TLS
-    | , asi que nadie puede interceptar o modificar las conexiones.
+    | De todos modos, tomamos todas las medidas posibles para proteger la
+    | seguridad de nuestros usuarios, por eso:
+  ol
+    li
+      | Este sitio usa las tecnologías más modernas y seguras de desarrollo
+      | web.
+    li
+      | Todo el tráfico entre tu navegador web y el servidor es encriptado usando
+      | el protocolo criptográfico
+      a(href='http://linkea.me/tlswiki')  TLS
+      | , asi que nadie puede interceptar o modificar las conexiones.
+    li
+      | Contamos con un sistema de lista negra ("blacklist") con el cual podemos
+      | bloquear ciertos dominios de ser acortados con nuestro servicio si
+      | descubrimos que son sitios no deseados.
   p
-    | También contamos con un sistema de lista negra ("blacklist") con el cual
-    | podemos bloquear ciertos dominios de ser acortados con nuestro servicio si
-    | descubrimos que son sitios no deseados.
-  p
-    | Para reportar un enlace corto, ver la sección de contacto debajo.
+    | Puedes reportar un enlace corto indeseado a través de la sección de 
+    a(href='#abuso') reportar abuso
+    |  debajo.
 
   h4#abuso ¿Cómo reporto un enlace?
   p
-    | Para reportar un enlace de linkea.me, por favor enviar un correo
-    | electrónico a:
-  p: a(href='mailto:contacto@linkea.me')  contacto@linkea.me
+    | Para reportar un enlace peligroso o negativo, por favor enviar un
+    | correo electrónico a:
+  p.center: a(href='mailto:abuso@linkea.me')  abuso@linkea.me
+  p
+    | Si logramos verificar que el enlace va en contra de nuestros
+    a(href='/terminos')  términos de uso
+    | , deshabilitaremos el enlace corto y agregaremos el enlace largo
+    | (original) a nuestra lista negra para que no se pueda volver a acortar.
 
   h4#duplicado ¿Puede haber enlaces cortos duplicados?
   p
@@ -56,6 +69,15 @@ block content
   p
     | Una vez creado un enlace corto, ese código queda reservado y no se puede
     | volver a usar para redireccionar a otro enlace largo.
+
+  h4#reservar ¿Se puede reservar enlaces?
+  p
+    | Estamos en proceso de incorporar un sistema de compra de enlaces cortos,
+    | con el cual se puede reservar el derecho exclusivo a una frase o palabra
+    | (por ejemplo, tu nombre o marca).
+  p
+    | Si deseas pre-registrar tu interés puedes enviar un correo a:
+  p.center: a(href='mailto:ventas@linkea.me')  ventas@linkea.me
 
   h4#validacion ¿Se valida el enlace largo antes de acortarlo?
   p
