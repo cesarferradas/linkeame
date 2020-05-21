@@ -9,6 +9,7 @@ const helmet = require('helmet')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const qrcode = require('qrcode')
+const urlParser = require('url-parse')
 
 const config = require('./config')
 const captcha = require('./utils/captcha')
@@ -50,18 +51,32 @@ app.route('/')
   })
 
   .post((req, res) => {
+    const errorData = {
+      csrfToken: req.csrfToken(),
+      ...captcha.generateChallenge(),
+      ...req.body,
+    }
+
     if (captcha.getChallenge(req.body._numbers) !== req.body.challenge) {
       res.render('index', {
-        csrfToken: req.csrfToken(),
         error: 'Verificación incorrecta',
-        ...captcha.generateChallenge(),
-        ...req.body,
+        ...errorData,
+      })
+    }
+
+    const code = req.body.code.trim()
+    let url = req.body.url.trim()
+    const parsedUrl = urlParser(url)
+
+    if (config.blacklistedDomains.includes(parsedUrl.hostname)) {
+      res.render('index', {
+        error: 'El dominio del enlace original no está permitido',
+        ...errorData,
       })
     } else {
-      let { code, url } = req.body
-      code = code.trim()
-      url = url.trim()
-      if (!url.startsWith('http')) url = `http://${url}`
+      if (!parsedUrl.protocol) url = `http://${url}`
+      console.log(url)
+      console.log(parsedUrl)
 
       const newLink = new Link({ url })
       if (code) newLink._id = code
@@ -69,16 +84,11 @@ app.route('/')
       newLink.save((err, link) => {
         if (err) {
           const error = (err.errors && (err.errors.url || err.errors._id))
-                      || (err.errmsg && err.errmsg.includes('duplicate') && 'El código personalizado no está disponible')
-                      || 'No se pudo acortar el enlace, por favor intenta de nuevo'
+            || (err.errmsg && err.errmsg.includes('duplicate') && 'El código personalizado no está disponible')
+            || 'No se pudo acortar el enlace, por favor intenta de nuevo'
           console.error(error)
 
-          res.render('index', {
-            csrfToken: req.csrfToken(),
-            error,
-            ...captcha.generateChallenge(),
-            ...req.body,
-          })
+          res.render('index', { error, ...errorData })
         } else {
           res.redirect(`/link/${link.id}`)
         }
@@ -86,7 +96,7 @@ app.route('/')
     }
   })
 
-app.route(['/l*/:linkId'])
+app.route('/l*/:linkId')
   .get((req, res) => {
     Link.findById(req.params.linkId, (err, link) => {
       if (err) {

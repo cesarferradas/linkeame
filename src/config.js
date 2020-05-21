@@ -10,7 +10,12 @@ config.allowedOrigins = [
   `https://${config.app.domain}`,
 ]
 
-// TODO add blacklisted domains
+config.blacklistedDomains = process.env.BLACKLISTED_DOMAINS
+if (config.blacklistedDomains) {
+  config.blacklistedDomains = config.blacklistedDomains.split(',')
+} else {
+  config.blacklistedDomains = []
+}
 
 config.env = process.env.NODE_ENV
 
@@ -28,7 +33,7 @@ config.morgan = {
   format: 'dev',
 }
 
-config.port = process.env.PORT || 5000
+config.port = process.env.PORT || 3000
 
 if (config.env === 'production') {
   config.morgan.format = 'combined'

@@ -33,9 +33,9 @@ describe('Base redirect', () => {
       .get('dY-Z2vk4X')
       .expect(404, done)
   })
-  it('returns a page if link not found', (done) => {
+  it('returns an error page link not found', (done) => {
     request(app)
       .get('/foobar')
-      .expect(200, done)
+      .expect(404, done)
   })
 })
