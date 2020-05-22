@@ -4,7 +4,10 @@ html(lang='es')
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1')
     meta(name='viewport' content='width=device-width, initial-scale=1')
-    meta(name='description' content='Acortador de enlaces web, acortador de URL, URL con marca')
+    meta(
+      name='description'
+      content='Linkeame. Acortador de URLs en español. Acorta tus enlaces web gratis. Enlaces con marca personalizada.'
+    )
     link(rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png')
     link(rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png')
     link(rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png')
@@ -14,11 +17,11 @@ html(lang='es')
     if pageTitle
       title #{websiteName} | #{pageTitle}
     else
-      title #{websiteName} | Acortador de enlaces web, acortador de URLs
+      title #{websiteName} | Acortador de URLs, acortador de enlaces en español
   body
     header
       h1: a(href='/') #{websiteName}
-      p Acortador de enlaces web
+      p Acortador de enlaces
       hr
       block header
     main
