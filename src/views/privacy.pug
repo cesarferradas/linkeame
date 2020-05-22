@@ -1,8 +1,22 @@
 extends default
 
+block head
+  - pageTitle = 'Política de privacidad'
+
 block content
   h4 Información que recaudamos
   p Recaudamos la menor cantidad de datos posible para brindar este servicio.
+
+  h5 Enlaces
+  p
+    | Los siguientes datos son guardados en nuestra base de datos cada vez que
+    | alguien completa el formulario de acortamiento de enlaces:
+    ul
+      li El enlace original
+      li El código corto
+      li La fecha de creación
+  p Estos datos son retenidos indefinidamente para poder ofrecer este servicio.
+
   h5 Registros del servidor
   p
     | Los siguientes datos son enviados a nuestro servidor cada vez que alguien
@@ -11,11 +25,7 @@ block content
       li El URL de la página visitada
       li Dirección de IP ("IP address")
       li Agente de usuario ("user agent")
-    | Estos datos son retenidos por una semana.
-
-  h4 Uso de tu información
-  p
-    | Mantenemos los registros del servidor con el único propósito de
+    | Estos datos son retenidos por una semana con el único propósito de
     | supervisar errores, prevenir abuso y mejorar el servicio.
   p No compartimos ninguna información con terceros.
 
@@ -23,4 +33,6 @@ block content
   p
     | Usamos "cookies" para prevenir abuso de nuestro formulario de
     | acortamiento de enlaces.
-  p El cookie que utilizamos es aleatorio y no contiene información personal.
+  p
+    | Los cookies que utilizamos son aleatorios y no contienen información
+    | personal.

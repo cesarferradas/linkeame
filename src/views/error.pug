@@ -1,4 +1,10 @@
 extends default
 
 block head
+  - pageTitle = 'Error'
   meta(name='robots' content='noindex')
+
+block content
+  p.center
+    | El URL ingresado no existe. Recuerda que el sistema distingue mayúsculas
+    | y minúsculas.

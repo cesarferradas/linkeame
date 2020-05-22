@@ -10,11 +10,11 @@ html(lang='es')
     link(rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png')
     link(rel='manifest' href='/site.webmanifest')
     link(href='/style.css' rel='stylesheet' type='text/css')
+    block head
     if pageTitle
       title #{websiteName} | #{pageTitle}
     else
       title #{websiteName} | Acortador de enlaces web, acortador de URLs
-    block head
   body
     header
       h1: a(href='/') #{websiteName}
@@ -24,8 +24,6 @@ html(lang='es')
     main
       if pageTitle
         h3.center #{pageTitle}
-      if msg
-        p.msg #{msg}
       if success
         p.msg.success #{success}
       if error

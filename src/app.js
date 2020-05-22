@@ -100,10 +100,7 @@ app.route('/l*/:linkId')
       if (err) {
         console.error(err)
       } else if (!link) {
-        res.status(404).render('error', {
-          msg: 'El URL ingresado no existe',
-          pageTitle: 'Error',
-        })
+        res.status(404).render('error')
       } else {
         const data = {
           adminUrl: `${config.app.domain}/link/${link._id}`,
@@ -127,24 +124,16 @@ app.route('/l*/:linkId')
   })
 
 app.route('/apoyo')
-  .get((req, res) => {
-    res.render('support', { pageTitle: 'Apoya al servicio' })
-  })
+  .get((req, res) => res.render('support'))
 
 app.route('/faq')
-  .get((req, res) => {
-    res.render('faq', { pageTitle: 'Preguntas frecuentes' })
-  })
+  .get((req, res) => res.render('faq'))
 
 app.route('/privacidad')
-  .get((req, res) => {
-    res.render('privacy', { pageTitle: 'Política de privacidad' })
-  })
+  .get((req, res) => res.render('privacy'))
 
 app.route('/terminos')
-  .get((req, res) => {
-    res.render('terms', { pageTitle: 'Términos de uso' })
-  })
+  .get((req, res) => res.render('terms'))
 
 app.route(['/:linkId', '//:linkId'])
   .get((req, res) => {
@@ -152,10 +141,7 @@ app.route(['/:linkId', '//:linkId'])
       if (err) {
         console.error(err)
       } else if (!link) {
-        res.status(404).render('error', {
-          msg: 'El URL ingresado no existe',
-          pageTitle: 'Error',
-        })
+        res.status(404).render('error')
       } else {
         link.clickCount += 1
         link.save()
@@ -166,10 +152,7 @@ app.route(['/:linkId', '//:linkId'])
 
 app.route('*')
   .get((req, res) => {
-    res.status(404).render('error', {
-      msg: 'El URL ingresado no existe',
-      pageTitle: 'Error',
-    })
+    res.status(404).render('error')
   })
 
 module.exports = app
