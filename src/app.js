@@ -66,7 +66,12 @@ app.route('/')
 
     const code = req.body.code.trim()
     let url = req.body.url.trim()
-    const parsedUrl = urlParser(url)
+    let parsedUrl = urlParser(url)
+
+    if (!parsedUrl.protocol) {
+      url = `http://${url}`
+      parsedUrl = urlParser(url)
+    }
 
     if (config.blacklistedDomains.includes(parsedUrl.hostname)) {
       res.render('index', {
@@ -74,8 +79,6 @@ app.route('/')
         ...errorData,
       })
     } else {
-      if (!parsedUrl.protocol) url = `http://${url}`
-
       const newLink = new Link({ url })
       if (code) newLink._id = code
 
