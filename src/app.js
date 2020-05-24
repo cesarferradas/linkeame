@@ -62,38 +62,38 @@ app.route('/')
         error: 'Verificación incorrecta',
         ...errorData,
       })
-    }
-
-    const code = req.body.code.trim()
-    let url = req.body.url.trim()
-    let parsedUrl = urlParser(url)
-
-    if (!parsedUrl.protocol) {
-      url = `http://${url}`
-      parsedUrl = urlParser(url)
-    }
-
-    if (config.blacklistedDomains.includes(parsedUrl.hostname)) {
-      res.render('index', {
-        error: 'El dominio del enlace original no está permitido',
-        ...errorData,
-      })
     } else {
-      const newLink = new Link({ url })
-      if (code) newLink._id = code
+      const code = req.body.code.trim()
+      let url = req.body.url.trim()
+      let parsedUrl = urlParser(url)
 
-      newLink.save((err, link) => {
-        if (err) {
-          const error = (err.errors && (err.errors.url || err.errors._id))
-            || (err.errmsg && err.errmsg.includes('duplicate') && 'El código personalizado no está disponible')
-            || 'No se pudo acortar el enlace, por favor intenta de nuevo'
-          console.error(error)
+      if (!parsedUrl.protocol) {
+        url = `http://${url}`
+        parsedUrl = urlParser(url)
+      }
 
-          res.render('index', { error, ...errorData })
-        } else {
-          res.redirect(`/link/${link.id}`)
-        }
-      })
+      if (config.blacklistedDomains.includes(parsedUrl.hostname)) {
+        res.render('index', {
+          error: 'El dominio del enlace original no está permitido',
+          ...errorData,
+        })
+      } else {
+        const newLink = new Link({ url })
+        if (code) newLink._id = code
+
+        newLink.save((err, link) => {
+          if (err) {
+            const error = (err.errors && (err.errors.url || err.errors._id))
+              || (err.errmsg && err.errmsg.includes('duplicate') && 'El código personalizado no está disponible')
+              || 'No se pudo acortar el enlace, por favor intenta de nuevo'
+            console.error(error)
+
+            res.render('index', { error, ...errorData })
+          } else {
+            res.redirect(`/link/${link.id}`)
+          }
+        })
+      }
     }
   })
 
