@@ -6,7 +6,7 @@ const code = {
       && /^[a-zA-Z0-9_-]+$/i.test(val)
   ),
   message: () => (
-    `El código debe tener entre ${config.linkSize.min} y ${config.linkSize.max} letras y/o números`
+    `El código debe tener entre ${config.linkSize.min} y ${config.linkSize.max} letras (sin tilde) y/o números`
   ),
 }
 

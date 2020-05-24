@@ -26,15 +26,15 @@ a {
   text-decoration: none;
 }
 
-input {
-  width: 95%;
-  height: 20px;
+label {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 8px;
 }
 
-textarea {
-  width: 95%;
-  height: 80px;
-  resize: vertical;
+input {
+  width: 97%;
+  height: 20px;
 }
 
 button {
@@ -66,6 +66,11 @@ footer {
   margin-bottom: 0px;
 }
 
+.t0 {
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
 .center {
    position: relative;
    width: 100%;
@@ -91,11 +96,11 @@ footer {
 }
 
 #code {
-  width: 207px;
+  width: 213px;
 }
 
 #challenge {
-  width: 180px;
+  width: 186px;
   position: relative;
   top: -10px;
   left: 5px;
