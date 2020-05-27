@@ -77,6 +77,12 @@ footer {
    text-align: center;
 }
 
+.right {
+   position: relative;
+   width: 100%;
+   text-align: right;
+}
+
 .msg {
   border-radius: 8px;
   font-weight: 500;
