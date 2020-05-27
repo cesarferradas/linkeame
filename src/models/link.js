@@ -1,15 +1,15 @@
 const mongoose = require('mongoose')
-const { nanoid } = require('nanoid')
+const { customAlphabet } = require('nanoid')
 
 const validation = require('../utils/validation')
 const config = require('../config')
 
-// TODO add secret so people can see the link stats
+const nanoid = customAlphabet(config.link.alphabet, config.link.size.default)
 
 const LinkSchema = new mongoose.Schema({
   _id: {
     type: String,
-    default: () => nanoid(config.linkSize.default),
+    default: () => nanoid(),
     validate: validation.code,
   },
   url: {

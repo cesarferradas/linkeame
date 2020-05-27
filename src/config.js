@@ -20,11 +20,14 @@ if (config.blacklistedDomains) {
 config.env = process.env.NODE_ENV
 
 // see https://zelark.github.io/nano-id-cc/
-// before changing the link size
-config.linkSize = {
-  default: 6,
-  min: 5,
-  max: 30,
+// before changing the link size or alphabet
+config.link = {
+  alphabet: '0123456789_abcdefghijklmnopqrstuvwxyz-',
+  size: {
+    default: 7,
+    min: 5,
+    max: 30,
+  },
 }
 
 config.mongoUrl = process.env.MONGODB_URI
