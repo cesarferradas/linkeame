@@ -103,28 +103,11 @@ app.route('/l*/:linkId')
   .get((req, res) => {
     const linkId = slugify(req.params.linkId)
     Link.findById(linkId.toLowerCase(), (err, link) => {
+      if (err) {
+        console.error(err)
+      }
       if (err || !link) {
-        // begin search for uppercase
-        console.info('Trying without lowercase')
-        Link.findById(linkId, (err2, link2) => {
-          if (err2 || !link2) {
-            console.error(err2)
-            res.status(404).render('error')
-          } else {
-            const data = {
-              clickCount: link2.clickCount,
-              longUrl: link2.url,
-              pageTitle: link2.d,
-              shortUrl: `${config.app.domain}/${linkId}`,
-              shortUrlFull: `http://${config.app.domain}/${linkId}`,
-              success: !link2.clickCount && '¡Enlace acortado! Guarda esta página para volver a ver los siguientes detalles',
-            }
-            qrcode.toDataURL(data.shortUrlFull, { width: 200 })
-              .then((qrData) => res.render('link', { qrData, ...data }))
-              .catch(() => res.render('link', data))
-          }
-        })
-        // end search for uppercase
+        res.status(404).render('error')
       } else {
         const data = {
           clickCount: link.clickCount,
@@ -160,20 +143,11 @@ app.route(['/:linkId', '//:linkId'])
   .get((req, res) => {
     const linkId = slugify(req.params.linkId)
     Link.findById(linkId.toLowerCase(), (err, link) => {
+      if (err) {
+        console.error(err)
+      }
       if (err || !link) {
-        // begin search for uppercase
-        console.info('Trying without lowercase')
-        Link.findById(linkId, (err2, link2) => {
-          if (err2 || !link2) {
-            console.error(err2)
-            res.status(404).render('error')
-          } else {
-            link2.clickCount += 1
-            link2.save()
-            res.redirect(link2.url)
-          }
-        })
-        // end search for uppercase
+        res.status(404).render('error')
       } else {
         link.clickCount += 1
         link.save()
