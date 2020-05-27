@@ -9,6 +9,7 @@ const helmet = require('helmet')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const qrcode = require('qrcode')
+const slugify = require('slugify')
 const urlParser = require('url-parse')
 
 const config = require('./config')
@@ -63,7 +64,7 @@ app.route('/')
         ...errorData,
       })
     } else {
-      const code = req.body.code.trim()
+      const code = slugify(req.body.code.trim())
       let url = req.body.url.trim()
       let parsedUrl = urlParser(url)
 
@@ -79,18 +80,20 @@ app.route('/')
         })
       } else {
         const newLink = new Link({ url })
-        if (code) newLink._id = code
+        if (code) {
+          // TODO toLowerCase
+          newLink._id = code
+        }
 
         newLink.save((err, link) => {
           if (err) {
+            console.error(err)
             const error = (err.errors && (err.errors.url || err.errors._id))
               || (err.errmsg && err.errmsg.includes('duplicate') && 'El código personalizado no está disponible')
               || 'No se pudo acortar el enlace, por favor intenta de nuevo'
-            console.error(error)
-
             res.render('index', { error, ...errorData })
           } else {
-            res.redirect(`/link/${link.id}`)
+            res.redirect(`/link/${code || link.id}`)
           }
         })
       }
@@ -99,19 +102,20 @@ app.route('/')
 
 app.route('/l*/:linkId')
   .get((req, res) => {
-    Link.findById(req.params.linkId, (err, link) => {
+    const linkId = slugify(req.params.linkId)
+    Link.findById(linkId, (err, link) => {
       if (err) {
         console.error(err)
       } else if (!link) {
+        // TODO try finding with toLowerCase
         res.status(404).render('error')
       } else {
         const data = {
-          adminUrl: `${config.app.domain}/link/${link._id}`,
           clickCount: link.clickCount,
           longUrl: link.url,
-          pageTitle: link._id,
-          shortUrl: `${config.app.domain}/${link._id}`,
-          shortUrlFull: `http://${config.app.domain}/${link._id}`,
+          pageTitle: linkId,
+          shortUrl: `${config.app.domain}/${linkId}`,
+          shortUrlFull: `http://${config.app.domain}/${linkId}`,
           success: !link.clickCount && '¡Enlace acortado! Guarda esta página para volver a ver los siguientes detalles',
         }
         qrcode.toDataURL(data.shortUrlFull, { width: 200 })
@@ -140,10 +144,12 @@ app.route('/terminos')
 
 app.route(['/:linkId', '//:linkId'])
   .get((req, res) => {
-    Link.findById(req.params.linkId, (err, link) => {
+    const linkId = slugify(req.params.linkId)
+    Link.findById(linkId, (err, link) => {
       if (err) {
         console.error(err)
       } else if (!link) {
+        // TODO try finding with toLowerCase
         res.status(404).render('error')
       } else {
         link.clickCount += 1
@@ -154,8 +160,6 @@ app.route(['/:linkId', '//:linkId'])
   })
 
 app.route('*')
-  .get((req, res) => {
-    res.status(404).render('error')
-  })
+  .get((req, res) => res.status(404).render('error'))
 
 module.exports = app
