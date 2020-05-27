@@ -18,8 +18,7 @@ const Link = require('./models/link')
 
 const app = express()
 
-app.locals.websiteName = config.app.name
-app.locals.websiteDomain = config.app.domain
+app.locals.config = config
 
 // Database
 mongoose.connect(config.mongoUrl, {
@@ -81,15 +80,15 @@ app.route('/')
       } else {
         const newLink = new Link({ url })
         if (code) {
-          // TODO toLowerCase
-          newLink._id = code
+          newLink._id = code.toLowerCase()
         }
 
         newLink.save((err, link) => {
           if (err) {
             console.error(err)
             const error = (err.errors && (err.errors.url || err.errors._id))
-              || (err.errmsg && err.errmsg.includes('duplicate') && 'El código personalizado no está disponible')
+              || (err.errmsg && err.errmsg.includes('duplicate')
+              && 'El código personalizado no está disponible')
               || 'No se pudo acortar el enlace, por favor intenta de nuevo'
             res.render('index', { error, ...errorData })
           } else {
@@ -103,12 +102,29 @@ app.route('/')
 app.route('/l*/:linkId')
   .get((req, res) => {
     const linkId = slugify(req.params.linkId)
-    Link.findById(linkId, (err, link) => {
-      if (err) {
-        console.error(err)
-      } else if (!link) {
-        // TODO try finding with toLowerCase
-        res.status(404).render('error')
+    Link.findById(linkId.toLowerCase(), (err, link) => {
+      if (err || !link) {
+        // begin search for uppercase
+        console.info('Trying without lowercase')
+        Link.findById(linkId, (err2, link2) => {
+          if (err2 || !link2) {
+            console.error(err2)
+            res.status(404).render('error')
+          } else {
+            const data = {
+              clickCount: link2.clickCount,
+              longUrl: link2.url,
+              pageTitle: link2.d,
+              shortUrl: `${config.app.domain}/${linkId}`,
+              shortUrlFull: `http://${config.app.domain}/${linkId}`,
+              success: !link2.clickCount && '¡Enlace acortado! Guarda esta página para volver a ver los siguientes detalles',
+            }
+            qrcode.toDataURL(data.shortUrlFull, { width: 200 })
+              .then((qrData) => res.render('link', { qrData, ...data }))
+              .catch(() => res.render('link', data))
+          }
+        })
+        // end search for uppercase
       } else {
         const data = {
           clickCount: link.clickCount,
@@ -119,9 +135,7 @@ app.route('/l*/:linkId')
           success: !link.clickCount && '¡Enlace acortado! Guarda esta página para volver a ver los siguientes detalles',
         }
         qrcode.toDataURL(data.shortUrlFull, { width: 200 })
-          .then((qrData) => {
-            res.render('link', { qrData, ...data })
-          })
+          .then((qrData) => res.render('link', { qrData, ...data }))
           .catch((qrError) => {
             console.error(qrError)
             res.render('link', data)
@@ -145,12 +159,21 @@ app.route('/terminos')
 app.route(['/:linkId', '//:linkId'])
   .get((req, res) => {
     const linkId = slugify(req.params.linkId)
-    Link.findById(linkId, (err, link) => {
-      if (err) {
-        console.error(err)
-      } else if (!link) {
-        // TODO try finding with toLowerCase
-        res.status(404).render('error')
+    Link.findById(linkId.toLowerCase(), (err, link) => {
+      if (err || !link) {
+        // begin search for uppercase
+        console.info('Trying without lowercase')
+        Link.findById(linkId, (err2, link2) => {
+          if (err2 || !link2) {
+            console.error(err2)
+            res.status(404).render('error')
+          } else {
+            link2.clickCount += 1
+            link2.save()
+            res.redirect(link2.url)
+          }
+        })
+        // end search for uppercase
       } else {
         link.clickCount += 1
         link.save()

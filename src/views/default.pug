@@ -15,12 +15,12 @@ html(lang='es')
     link(href='/style.css' rel='stylesheet' type='text/css')
     block head
     if pageTitle
-      title #{websiteName} | #{pageTitle}
+      title #{config.app.name} | #{pageTitle}
     else
-      title #{websiteName} | Acortador de URLs, acortador de enlaces en español
+      title #{config.app.name} | Acortador de URLs, acortador de enlaces en español
   body
     header
-      h1: a(href='/') #{websiteName}
+      h1: a(href='/') #{config.app.name}
       p Acortador de enlaces
       hr
       block header

@@ -8,7 +8,12 @@ block content
     input#url(name='url' required type='text' value=url)
     label(for='code') Código personalizado (opcional)
     code linkea.me/
-    input#code(name='code' type='text' value=code)
+    input#code(
+      maxlength=config.link.size.max
+      name='code'
+      type='text'
+      value=code
+    )
     br
     div.right
       small acepta letras, números y guiones
