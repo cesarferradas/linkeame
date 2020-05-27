@@ -7,11 +7,11 @@ block content
     label(for='url') Enlace largo
     input#url(name='url' required type='text' value=url)
     label(for='code') Código personalizado (opcional)
-    code #{websiteDomain}/
+    code linkea.me/
     input#code(name='code' type='text' value=code)
     br
-    div.center
-      small distingue mayúsculas y minúsculas
+    div.right
+      small acepta letras, números y guiones
     label(for='challenge') Verificación
     img(alt='Verificación' src=`data:image/jpeg;base64,${validationCode}`)
     input#challenge(name='challenge' required type='text')
