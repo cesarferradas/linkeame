@@ -115,3 +115,6 @@ dist
 
 # Redis
 dump.rdb
+
+# MacOS
+.DS_Store

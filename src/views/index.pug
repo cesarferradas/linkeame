@@ -14,7 +14,6 @@ block content
       type='text'
       value=code
     )
-    br
     div.right
       small acepta letras, números y guiones
     label(for='challenge') Verificación
@@ -22,9 +21,11 @@ block content
     input#challenge(name='challenge' required type='text')
     p
     button(type='submit') Acortar
+  p
+  include includes/paypal.pug
 
 block footer
-  p: a(href='/apoyo'): strong Apoyar ❤️
+  p: a(href='/apoyo'): strong Apoyar
   p: a(href='/faq') Preguntas frecuentes
   p: a(href='/privacidad') Privacidad
   p: a(href='/terminos') Términos
