@@ -3,7 +3,7 @@ const config = require('../config')
 const code = {
   validator: (val) => (
     val.length >= config.link.size.min && val.length <= config.link.size.max
-      && /^[a-zA-Z0-9_-]+$/i.test(val)
+      && config.link.regex.test(val)
   ),
   message: () => (
     `El código debe tener entre ${config.link.size.min} y ${config.link.size.max} letras, números y guiones`

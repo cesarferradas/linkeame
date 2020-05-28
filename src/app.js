@@ -92,14 +92,14 @@ app.route('/')
               || 'No se pudo acortar el enlace, por favor intenta de nuevo'
             res.render('index', { error, ...errorData })
           } else {
-            res.redirect(`/link/${code || link.id}`)
+            res.redirect(`/@${code || link.id}`)
           }
         })
       }
     }
   })
 
-app.route('/l*/:linkId')
+app.route(['/@:linkId', '/link/:linkId'])
   .get((req, res) => {
     const linkId = slugify(req.params.linkId)
     Link.findById(linkId.toLowerCase(), (err, link) => {
@@ -110,12 +110,12 @@ app.route('/l*/:linkId')
         res.status(404).render('error')
       } else {
         const data = {
+          pageTitle: linkId,
+          success: !link.clickCount && '¡Enlace acortado! Guarda esta página para volver a ver los siguientes detalles',
+          shortUrlFull: `http://${config.app.domain}/${linkId}`,
+          shortUrl: `${config.app.domain}/${linkId}`,
           clickCount: link.clickCount,
           longUrl: link.url,
-          pageTitle: linkId,
-          shortUrl: `${config.app.domain}/${linkId}`,
-          shortUrlFull: `http://${config.app.domain}/${linkId}`,
-          success: !link.clickCount && '¡Enlace acortado! Guarda esta página para volver a ver los siguientes detalles',
         }
         qrcode.toDataURL(data.shortUrlFull, { width: 200 })
           .then((qrData) => res.render('link', { qrData, ...data }))
@@ -129,6 +129,9 @@ app.route('/l*/:linkId')
 
 app.route('/apoyo')
   .get((req, res) => res.render('support'))
+
+app.route('/gracias')
+  .get((req, res) => res.render('thanks'))
 
 app.route('/faq')
   .get((req, res) => res.render('faq'))

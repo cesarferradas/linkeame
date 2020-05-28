@@ -22,7 +22,8 @@ config.env = process.env.NODE_ENV
 // see https://zelark.github.io/nano-id-cc/
 // before changing the link size or alphabet
 config.link = {
-  alphabet: '0123456789abcdefghijklmnopqrstuvwxyz_-',
+  alphabet: '0123456789abcdefghijklmnopqrstuvwxyz',
+  regex: /^[0-9A-Za-z_-]+$/i,
   size: {
     default: 7,
     min: 5,

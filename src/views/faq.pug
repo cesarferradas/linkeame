@@ -12,12 +12,12 @@ block content
     | Cuando alguien visita el enlace corto, incrementamos el contador de
     | número de clicks y redireccionamos el tráfico al enlace original.
   p
-    | Puedes ver los datos de cualquier enlace corto agregando el texto
-    | "<code>/link</code>" detrás del código corto.
+    | Puedes ver los datos de cualquier enlace corto agregando una arroba
+    | "@" detrás del código corto.
   p Por ejemplo, si el enlace corto es:
   p: a(href='https://linkea.me/ejemplo') linkea.me/ejemplo
   p Los detalles se encuentran en:
-  p: a(href='https://linkea.me/link/ejemplo') linkea.me/link/ejemplo
+  p: a(href='https://linkea.me/@ejemplo') linkea.me/@ejemplo
 
   h4#costo ¿Cuánto cuesta?
   p

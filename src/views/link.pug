@@ -6,8 +6,29 @@ block head
 block content
   p Enlace corto
   p: a.break(href=shortUrlFull) #{shortUrl}
+  p Compartir
+  p.center
+    a.fa.fa-twitter(
+      href=`https://twitter.com/intent/tweet?url=${shortUrlFull}`
+      target='_blank'
+      title='Compartir en Twitter'
+    )
+    a.fa.fa-facebook(
+      href=`https://www.facebook.com/sharer/sharer.php?u=${shortUrlFull}`
+      target='_blank'
+      title='Compartir en Facebook'
+    )
+    a.fa.fa-whatsapp(
+      href=`https://api.whatsapp.com/send?text=${shortUrl}`
+      target='_blank'
+      title='Compartir en WhatsApp'
+    )
+    a.fa.fa-linkedin(
+      href=`https://www.linkedin.com/sharing/share-offsite?url=${encodeURI(shortUrlFull)}`
+      target='_blank'
+      title='Compartir en LinkedIn'
+    )
   if qrData
-    p.b0 Código QR
     img.center(alt='Código QR' src=qrData)
   p.t0 Número de clicks
   p: strong #{clickCount}
