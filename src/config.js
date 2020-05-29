@@ -5,11 +5,6 @@ config.app = {
   name: process.env.APP_NAME,
 }
 
-config.allowedOrigins = [
-  `http://${config.app.domain}`,
-  `https://${config.app.domain}`,
-]
-
 config.blacklistedDomains = process.env.BLACKLISTED_DOMAINS
 if (config.blacklistedDomains) {
   config.blacklistedDomains = config.blacklistedDomains.split(',')
@@ -35,6 +30,12 @@ config.mongoUrl = process.env.MONGODB_URI
 
 config.morgan = {
   format: 'dev',
+}
+
+config.phishtank = {
+  appKey: process.env.PHISHTANK_APP_KEY,
+  url: process.env.PHISHTANK_URL,
+  username: process.env.PHISHTANK_USERNAME,
 }
 
 config.port = process.env.PORT || 3000

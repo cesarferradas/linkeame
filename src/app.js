@@ -2,7 +2,6 @@ const path = require('path')
 
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-const cors = require('cors')
 const csrf = require('csurf')
 const express = require('express')
 const helmet = require('helmet')
@@ -31,7 +30,6 @@ mongoose.connect(config.mongoUrl, {
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use(cors({ credentials: true, origin: config.allowedOrigins }))
 app.use(csrf({ cookie: true }))
 app.use(helmet())
 app.use(morgan(config.morgan.format))
