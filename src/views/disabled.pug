@@ -5,8 +5,11 @@ block head
   meta(name='robots' content='noindex')
 
 block content
-  p El enlace ingresado redirecciona a una página que puede ser peligrosa.
-  p Para proteger a nuestros usuarios, hemos deshabilitado el enlace corto.
-  if longUrl
-    p Si deseas acceder a la página, a tu propio riesgo, haz click en el enlace:
-    p: a.break(href=longUrl) #{longUrl}
+  p
+    | El enlace ingresado redirecciona a una página que hemos identificado como
+    | peligrosa.
+  p
+    | Para proteger a nuestros usuarios, hemos desactivado el enlace
+    | automáticamente.
+  p Si el enlace es tuyo y crees que esto fue un error, contáctanos:
+  p.center: a(href='mailto:abuso@linkea.me') abuso@linkea.me
