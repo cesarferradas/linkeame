@@ -21,9 +21,9 @@ const LinkSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+  isDisabled: {
+    type: Boolean,
+    default: false,
   },
 }, { timestamps: true })
 

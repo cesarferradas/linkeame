@@ -151,6 +151,8 @@ app.route(['/:linkId', '//:linkId'])
       }
       if (err || !link) {
         res.status(404).render('error')
+      } else if (link.isDisabled) {
+        res.render('disabled', { longUrl: link.url })
       } else {
         link.clickCount += 1
         link.save()
