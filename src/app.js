@@ -106,6 +106,8 @@ app.route(['/@:linkId', '/link/:linkId'])
       }
       if (err || !link) {
         res.status(404).render('error')
+      } else if (link.isDisabled) {
+        res.render('disabled')
       } else {
         const data = {
           pageTitle: linkId,

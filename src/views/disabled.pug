@@ -6,8 +6,7 @@ block head
 
 block content
   p El enlace ingresado redirecciona a una página que puede ser peligrosa.
-  p 
-    | Para proteger a nuestros usuarios, hemos deshabilitado la redirección
-    | automática.
-  p Si deseas acceder a la página, a tu propio riesgo, haz click en el enlace:
-  p: a.break(href=longUrl) #{longUrl}
+  p Para proteger a nuestros usuarios, hemos deshabilitado el enlace corto.
+  if longUrl
+    p Si deseas acceder a la página, a tu propio riesgo, haz click en el enlace:
+    p: a.break(href=longUrl) #{longUrl}
