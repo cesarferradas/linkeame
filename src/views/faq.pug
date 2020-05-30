@@ -20,39 +20,37 @@ block content
   p: a(href='https://linkea.me/@ejemplo') linkea.me/@ejemplo
 
   h4#costo ¿Cuánto cuesta?
-  p
-    | Nada. El servicio es completamente gratuito y libre de anuncios
-    | publicitarios.
+  p El servicio es completamente gratis y libre de anuncios publicitarios.
   p
     | Sin embargo, buscamos
     a(href='/apoyo')  donaciones
-    |  voluntarias de nuestros usuarios para cubrir los costos operativos y
+    |  voluntarias de nuestros usuarios para cubrir costos operativos y
     | mantener el sitio web activo.
 
   h4#seguridad ¿Es seguro?
   p
-    | Como cualquier otro sitio web, es responsabilidad de los usuarios de
-    | internet tener cuidado al hacer click en cualquier enlace.
+    | Como con cualquier otro sitio web, es responsabilidad de los usuarios de
+    | Internet tener cuidado al hacer click en cualquier enlace.
   p
-    | De todos modos, tomamos todas las medidas posibles para proteger la
-    | seguridad de nuestros usuarios, por eso:
-  ol
+    | De todas formas, tomamos las siguientes medidas para proteger a nuestros
+    | usuarios:
+  ul
     li
-      | Este sitio usa las tecnologías más modernas y seguras de desarrollo
-      | web.
-    li
-      | Todo el tráfico entre tu navegador web y el servidor es encriptado usando
-      | el protocolo criptográfico
+      | Usamos el protocolo criptográfico
       a(href='https://linkea.me/tlswiki')  TLS
-      | , asi que nadie puede interceptar o modificar las conexiones.
+      |  para encriptar todo el tráfico entre tu navegador web y el servidor,
+      | asi que nadie puede interceptar o modificar las conexiones.
     li
-      | Contamos con un sistema de lista negra ("blacklist") con el cual podemos
-      | bloquear ciertos dominios de ser acortados con nuestro servicio si
-      | descubrimos que son sitios no deseados.
-  p
-    | Puedes reportar un enlace corto indeseado a través de la sección de 
-    a(href='#abuso') reportar abuso
-    |  debajo.
+      | Deshabilitamos enlaces que han sido agregados a
+      a(href='http://linkea.me/phishtank')  PhishTank
+      | , un servicio que reporta URLs de "phishing" usado por empresas como
+      | Yahoo, Mozilla, Avira, Kaspersky y
+      a(href="https://linkea.me/friendsofphishtank")  muchas más
+      | .
+    li
+      | Contamos con un sistema de lista negra con el cual podemos bloquear
+      | ciertos dominios de ser acortados.
+  p Puedes reportar un enlace a través de la siguiente sección.
 
   h4#abuso ¿Cómo reporto un enlace?
   p
@@ -62,8 +60,14 @@ block content
   p
     | Si logramos verificar que el enlace va en contra de nuestros
     a(href='/terminos')  términos de uso
-    | , deshabilitaremos el enlace corto y agregaremos el enlace largo
-    | (original) a nuestra lista negra para que no se pueda volver a acortar.
+    |  tomaremos las siguientes medidas:
+  ul
+    li Deshabilitaremos el enlace corto permanentemente.
+    li Agregaremos el dominio del enlace largo (original) a nuestra lista negra.
+    li
+      | Reportaremos el enlace original a
+      a(href='https://linkea.me/phishtank')  PhishTank
+      | .
 
   h4#duplicado ¿Puede haber enlaces cortos duplicados?
   p
