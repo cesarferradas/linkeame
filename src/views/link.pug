@@ -9,31 +9,36 @@ block head
   )
 
 block content
-  p
-    | Enlace corto
-    |  [
-    span#copy(data-clipboard-text=shortUrl) copiar
-    | ]
+  p Enlace corto
   p: a.break(href=shortUrlFull) #{shortUrl}
 
   p Compartir
   p.center
+    a#copy.fa.fa-copy(
+      aria-hidden='true'
+      data-clipboard-text=shortUrl
+      title='Copiar enlace'
+    )
     a.fa.fa-twitter(
+      aria-hidden='true'
       href=`https://twitter.com/intent/tweet?url=${shortUrlFull}`
       target='_blank'
       title='Compartir en Twitter'
     )
     a.fa.fa-facebook(
+      aria-hidden='true'
       href=`https://www.facebook.com/sharer/sharer.php?u=${shortUrlFull}`
       target='_blank'
       title='Compartir en Facebook'
     )
     a.fa.fa-whatsapp(
+      aria-hidden='true'
       href=`https://api.whatsapp.com/send?text=${shortUrl}`
       target='_blank'
       title='Compartir en WhatsApp'
     )
     a.fa.fa-linkedin(
+      aria-hidden='true'
       href=`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shortUrl)}`
       target='_blank'
       title='Compartir en LinkedIn'

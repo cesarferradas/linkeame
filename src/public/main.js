@@ -1,7 +1,9 @@
 var clip = new ClipboardJS('#copy')
-var text = document.getElementById('copy')
+var trigger = document.getElementById('copy')
 clip.on('success', function (e) {
-  text.innerHTML = 'copiado'
-  text.removeAttribute('id')
+  trigger.className = 'fa fa-check'
+  setTimeout(function() {
+    trigger.className = 'fa fa-copy'
+  }, 500)
   e.clearSelection()
 })
