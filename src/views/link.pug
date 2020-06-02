@@ -9,8 +9,13 @@ block head
   )
 
 block content
-  p Enlace corto
+  p
+    | Enlace corto
+    |  [
+    span#copy(data-clipboard-text=shortUrl) copiar
+    | ]
   p: a.break(href=shortUrlFull) #{shortUrl}
+
   p Compartir
   p.center
     a.fa.fa-twitter(
@@ -39,3 +44,6 @@ block content
   p: strong #{clickCount}
   p Enlace original
   p: a.break(href=longUrl) #{longUrl}
+
+  script(src='/clip.js')
+  script(src='/main.js')

@@ -130,6 +130,12 @@ footer {
   color: white;
 }
 
+#copy {
+  color: #00619a;
+  cursor: pointer;
+  border-bottom: 1px dotted black;
+}
+
 #url {
   width: 97%;
   height: 20px;
