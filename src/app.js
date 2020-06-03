@@ -83,11 +83,13 @@ app.route('/')
 
         newLink.save((err, link) => {
           if (err) {
-            console.error(err)
             const error = (err.errors && (err.errors.url || err.errors._id))
               || (err.errmsg && err.errmsg.includes('duplicate')
               && 'El código personalizado no está disponible')
               || 'No se pudo acortar el enlace, por favor intenta de nuevo'
+
+            console.error(`Error shortening ${url} to ${code}: ${error}`)
+
             res.render('index', { error, ...errorData })
           } else {
             res.redirect(`/@${code || link.id}`)
@@ -96,6 +98,21 @@ app.route('/')
       }
     }
   })
+
+app.route('/apoyo')
+  .get((req, res) => res.render('support'))
+
+app.route('/gracias')
+  .get((req, res) => res.render('thanks'))
+
+app.route('/faq')
+  .get((req, res) => res.render('faq'))
+
+app.route('/privacidad')
+  .get((req, res) => res.render('privacy'))
+
+app.route('/terminos')
+  .get((req, res) => res.render('terms'))
 
 app.route(['/@:linkId', '/link/:linkId'])
   .get((req, res) => {
@@ -127,20 +144,23 @@ app.route(['/@:linkId', '/link/:linkId'])
     })
   })
 
-app.route('/apoyo')
-  .get((req, res) => res.render('support'))
-
-app.route('/gracias')
-  .get((req, res) => res.render('thanks'))
-
-app.route('/faq')
-  .get((req, res) => res.render('faq'))
-
-app.route('/privacidad')
-  .get((req, res) => res.render('privacy'))
-
-app.route('/terminos')
-  .get((req, res) => res.render('terms'))
+app.route('/api')
+  .get((req, res) => {
+    if (!req.query.u) {
+      res.status(400).json({ error: 'Parametro "u" es requerido' })
+    } else {
+      const url = decodeURIComponent(req.query.u)
+      const newLink = new Link({ url })
+      newLink.save((err, link) => {
+        if (err || !link) {
+          console.error(err)
+          res.status(500).json({ error: 'No se pudo acortar' })
+        } else {
+          res.json({ code: link.id })
+        }
+      })
+    }
+  })
 
 app.route(['/:linkId', '//:linkId'])
   .get((req, res) => {
