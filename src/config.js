@@ -12,6 +12,16 @@ if (config.blacklistedDomains) {
   config.blacklistedDomains = []
 }
 
+config.corsOptions = {
+  origin: '*',
+  methods: 'GET',
+  allowedHeaders: [
+    'Accept',
+    'Content-Type',
+    'X-Csrf-Token',
+  ],
+}
+
 config.env = process.env.NODE_ENV
 
 // see https://zelark.github.io/nano-id-cc/
