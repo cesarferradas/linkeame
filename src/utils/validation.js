@@ -11,7 +11,10 @@ const code = {
 }
 
 const url = {
-  validator: (val) => /^https?:\/\/[a-zA-Z0-9]+.[a-zA-Z0-9]/i.test(val),
+  validator: (val) => (
+    /^https?:\/\/[a-zA-Z0-9]+\.[a-zA-Z0-9]/i.test(val)
+    || /^mailto:[a-zA-Z0-9.+]+@[a-z0-9]+\.[a-z]+$/i.test(val)
+  ),
   message: () => 'El formato del enlace largo no es válido',
 }
 
