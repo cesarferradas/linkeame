@@ -14,7 +14,7 @@ const web = require('./routes/web')
 
 const app = express()
 
-app.set('trust proxy', 'loopback')
+app.set('trust proxy', true)
 app.locals.config = config
 
 // Database
