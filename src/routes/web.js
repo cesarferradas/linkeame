@@ -55,10 +55,9 @@ web.route('/')
             const error = (err.errors && (err.errors.url || err.errors._id))
               || (err.errmsg && err.errmsg.includes('duplicate')
               && 'El código personalizado no está disponible')
-              || 'No se pudo acortar el enlace, por favor intenta de nuevo'
+              || 'Hubo un error, por favor intenta de nuevo'
 
             console.error(`Error shortening ${url} to ${code}: ${error}`)
-
             res.render('index', { error, ...errorData })
           } else {
             res.redirect(`/@${code || link.id}`)
