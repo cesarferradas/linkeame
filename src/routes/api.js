@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const rateLimit = require('express-rate-limit')
 const urlParser = require('url-parse')
 
 const Link = require('../models/link')
@@ -8,6 +9,7 @@ const config = require('../config')
 const api = express.Router()
 
 api.use(cors(config.corsOptions))
+api.use(rateLimit(config.rateLimitOptions))
 
 api.route('/')
   .get((req, res) => {

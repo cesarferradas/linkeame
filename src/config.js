@@ -50,6 +50,14 @@ config.phishtank = {
 
 config.port = process.env.PORT || 3000
 
+config.rateLimitOptions = {
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 20, // 20 requests per windowMs
+  message: {
+    error: 'Demasiadas solicitudes, intenta de nuevo más tarde',
+  },
+}
+
 if (config.env === 'production') {
   config.morgan.format = 'combined'
 }
