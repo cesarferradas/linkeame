@@ -23,7 +23,7 @@
     "parserOptions": {
         "ecmaVersion": 2018
     },
-    "ignorePatterns": ["/src/public/*.js"],
+    "ignorePatterns": ["/src/public/js/*.js"],
     "rules": {
         "no-console": ["error", {"allow": ["error", "info", "warn"]}],
         "no-param-reassign": 0,

@@ -26,6 +26,11 @@ a {
   text-decoration: none;
 }
 
+hr {
+  border: 0;
+  border-top: 2px solid #ccc;
+}
+
 label {
   display: block;
   margin-top: 20px;
