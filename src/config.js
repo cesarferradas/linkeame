@@ -5,9 +5,8 @@ config.app = {
   name: process.env.APP_NAME,
 }
 
-config.blacklistedDomains = process.env.BLACKLISTED_DOMAINS
-if (config.blacklistedDomains) {
-  config.blacklistedDomains = config.blacklistedDomains.split(',')
+if (process.env.BLACKLISTED_DOMAINS) {
+  config.blacklistedDomains = process.env.BLACKLISTED_DOMAINS.split(',')
 } else {
   config.blacklistedDomains = []
 }
@@ -27,10 +26,10 @@ config.env = process.env.NODE_ENV
 // see https://zelark.github.io/nano-id-cc/
 // before changing the link size or alphabet
 config.link = {
-  alphabet: '0123456789abcdefghijklmnopqrstuvwxyz',
+  alphabet: '0123456789abcdefghijklmnopqrstuvwxyz_-',
   regex: /^[0-9A-Za-z_-]+$/i,
   size: {
-    default: 7,
+    default: 6,
     min: 5,
     max: 30,
   },
@@ -54,7 +53,7 @@ config.rateLimitOptions = {
   windowMs: 1 * 60 * 1000, // 1 minute
   max: 20, // 20 requests per windowMs
   message: {
-    error: 'Demasiadas solicitudes, intenta de nuevo más tarde',
+    error: 'Demasiadas solicitudes, intenta más tarde',
   },
 }
 

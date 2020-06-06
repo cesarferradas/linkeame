@@ -27,7 +27,6 @@ api.route('/')
         const newLink = new Link({ url })
         newLink.save((err, link) => {
           if (err || !link) {
-            console.error(err)
             res.status(400).json({ error: 'No se pudo acortar' })
           } else {
             res.status(201).json({ data: `${config.app.domain}/${link.id}` })

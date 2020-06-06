@@ -46,9 +46,7 @@ web.route('/')
         })
       } else {
         const newLink = new Link({ url })
-        if (code) {
-          newLink._id = code.toLowerCase()
-        }
+        if (code) newLink._id = code.toLowerCase()
 
         newLink.save((err, link) => {
           if (err) {
@@ -71,9 +69,7 @@ web.route(['/@:linkId', '/link/:linkId'])
   .get((req, res) => {
     const linkId = slugify(req.params.linkId)
     Link.findById(linkId.toLowerCase(), (err, link) => {
-      if (err) {
-        console.error(err)
-      }
+      if (err) console.error(err)
       if (err || !link) {
         res.status(404).render('error')
       } else if (link.isDisabled) {
@@ -101,9 +97,7 @@ web.route(['/:linkId', '//:linkId'])
   .get((req, res) => {
     const linkId = slugify(req.params.linkId)
     Link.findById(linkId.toLowerCase(), (err, link) => {
-      if (err) {
-        console.error(err)
-      }
+      if (err) console.error(err)
       if (err || !link) {
         res.status(404).render('error')
       } else if (link.isDisabled) {
@@ -116,7 +110,6 @@ web.route(['/:linkId', '//:linkId'])
     })
   })
 
-web.route('*')
-  .get((req, res) => res.status(404).render('error'))
+web.route('*').get((req, res) => res.status(404).render('error'))
 
 module.exports = web
