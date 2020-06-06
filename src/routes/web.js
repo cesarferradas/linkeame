@@ -111,7 +111,7 @@ web.route(['/:linkId', '//:linkId'])
       } else {
         link.clickCount += 1
         link.save()
-        res.redirect(link.url)
+        res.redirect(301, link.url)
       }
     })
   })
