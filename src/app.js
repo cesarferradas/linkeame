@@ -28,7 +28,7 @@ mongoose.connect(config.mongoUrl, {
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use(csrf({ cookie: true }))
+app.use(csrf(config.csrfOptions))
 app.use(helmet())
 app.use(morgan(config.morgan.format))
 

@@ -1,5 +1,7 @@
 const config = module.exports
 
+config.env = process.env.NODE_ENV
+
 config.app = {
   domain: process.env.APP_DOMAIN,
   name: process.env.APP_NAME,
@@ -21,7 +23,13 @@ config.corsOptions = {
   ],
 }
 
-config.env = process.env.NODE_ENV
+config.csrfOptions = {
+  cookie: {
+    httpOnly: true,
+    sameSite: 'strict',
+    secure: config.env === 'production',
+  },
+}
 
 // see https://zelark.github.io/nano-id-cc/
 // before changing the link size or alphabet
