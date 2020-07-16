@@ -35,7 +35,7 @@ config.cspOptions = {
       defaultSrc: ["'self'"],
       imgSrc: ["'self'", 'data:', 'www.paypal.com', 'www.paypalobjects.com'],
       scriptSrc: ["'self'", 'www.paypal.com', 'www.paypalobjects.com'],
-      styleSrc: ["'self'"],
+      styleSrc: ["'self'", 'cdnjs.cloudflare.com'],
     },
   },
 }
