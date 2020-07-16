@@ -1,5 +1,6 @@
-const express = require('express')
 const cors = require('cors')
+const express = require('express')
+const helmet = require('helmet')
 const rateLimit = require('express-rate-limit')
 const urlParser = require('url-parse')
 
@@ -10,6 +11,7 @@ const api = express.Router()
 
 api.use(cors(config.corsOptions))
 api.use(rateLimit(config.rateLimitOptions))
+api.use(helmet.contentSecurityPolicy(config.cspOptions.api))
 
 api.route('/')
   .get((req, res) => {

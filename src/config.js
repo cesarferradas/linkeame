@@ -23,6 +23,23 @@ config.corsOptions = {
   ],
 }
 
+config.cspOptions = {
+  api: {
+    directives: {
+      defaultSrc: ["'none'"],
+      frameAncestors: ["'none'"],
+    },
+  },
+  web: {
+    directives: {
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", 'paypal.com', 'paypalobjects.com'],
+      scriptSrc: ["'self'", 'paypal.com', 'paypalobjects.com'],
+      styleSrc: ["'self'"],
+    },
+  },
+}
+
 config.csrfOptions = {
   cookie: {
     httpOnly: true,

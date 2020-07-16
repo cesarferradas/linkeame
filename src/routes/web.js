@@ -1,4 +1,5 @@
 const express = require('express')
+const helmet = require('helmet')
 const qrcode = require('qrcode')
 const slugify = require('slugify')
 const urlParser = require('url-parse')
@@ -8,6 +9,23 @@ const captcha = require('../utils/captcha')
 const config = require('../config')
 
 const web = express.Router()
+
+web.use(helmet.contentSecurityPolicy(config.cspOptions.web))
+
+web.route('/apoyo')
+  .get((req, res) => res.render('support'))
+
+web.route('/gracias')
+  .get((req, res) => res.render('thanks'))
+
+web.route('/faq')
+  .get((req, res) => res.render('faq'))
+
+web.route('/privacidad')
+  .get((req, res) => res.render('privacy'))
+
+web.route('/terminos')
+  .get((req, res) => res.render('terms'))
 
 web.route('/')
   .get((req, res) => {

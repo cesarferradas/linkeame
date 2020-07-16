@@ -38,23 +38,7 @@ app.set('views', path.join(__dirname, './views'))
 app.use(express.static(path.join(__dirname, './public')))
 
 // Routes
-app.route('/apoyo')
-  .get((req, res) => res.render('support'))
-
-app.route('/gracias')
-  .get((req, res) => res.render('thanks'))
-
-app.route('/faq')
-  .get((req, res) => res.render('faq'))
-
-app.route('/privacidad')
-  .get((req, res) => res.render('privacy'))
-
-app.route('/terminos')
-  .get((req, res) => res.render('terms'))
-
 app.use('/api', api)
-
 app.use('/', web)
 
 module.exports = app
