@@ -48,6 +48,11 @@ config.csrfOptions = {
   },
 }
 
+config.hstsOptions = {
+  maxAge: 31536000,
+  includeSubDomains: true,
+}
+
 // see https://zelark.github.io/nano-id-cc/
 // before changing the link size or alphabet
 config.link = {
@@ -80,6 +85,10 @@ config.rateLimitOptions = {
   message: {
     error: 'Demasiadas solicitudes, intenta más tarde',
   },
+}
+
+config.referrerPolicy = {
+  policy: 'no-referrer',
 }
 
 if (config.env === 'production') {

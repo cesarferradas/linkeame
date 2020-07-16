@@ -30,6 +30,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(csrf(config.csrfOptions))
 app.use(helmet())
+app.use(helmet.referrerPolicy(config.referrerPolicy))
+app.use(helmet.hsts(config.hstsOptions))
 app.use(morgan(config.morgan.format))
 
 // Views and static files
