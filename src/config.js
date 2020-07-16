@@ -33,8 +33,8 @@ config.cspOptions = {
   web: {
     directives: {
       defaultSrc: ["'self'"],
-      imgSrc: ["'self'", 'paypal.com', 'paypalobjects.com'],
-      scriptSrc: ["'self'", 'paypal.com', 'paypalobjects.com'],
+      imgSrc: ["'self'", 'www.paypal.com', 'www.paypalobjects.com'],
+      scriptSrc: ["'self'", 'www.paypal.com', 'www.paypalobjects.com'],
       styleSrc: ["'self'"],
     },
   },
