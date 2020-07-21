@@ -44,7 +44,7 @@ config.csrfOptions = {
   cookie: {
     httpOnly: true,
     sameSite: 'strict',
-    secure: config.env === 'production',
+    secure: false,
   },
 }
 
@@ -92,5 +92,7 @@ config.referrerPolicy = {
 }
 
 if (config.env === 'production') {
+  config.csrfOptions.cookie.secure = true
   config.morgan.format = 'combined'
+  config.upgradeInsecureRequests = true
 }

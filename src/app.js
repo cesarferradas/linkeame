@@ -33,6 +33,16 @@ app.use(helmet())
 app.use(helmet.referrerPolicy(config.referrerPolicy))
 app.use(helmet.hsts(config.hstsOptions))
 app.use(morgan(config.morgan.format))
+// Redirect insecure requests to https in production
+app.use((req, res, next) => {
+  // req.secure only works behind a reverse proxy if 'trust proxy' != false
+  // otherwise we must check the x-forwarded-proto header
+  if (config.upgradeInsecureRequests && !req.secure) {
+    res.redirect(301, `https://${config.app.domain}${req.url}`)
+  } else {
+    next()
+  }
+})
 
 // Views and static files
 app.set('view engine', 'pug')
