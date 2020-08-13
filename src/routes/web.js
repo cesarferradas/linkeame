@@ -12,12 +12,6 @@ const web = express.Router()
 
 web.use(helmet.contentSecurityPolicy(config.cspOptions.web))
 
-web.route('/apoyo')
-  .get((req, res) => res.render('support'))
-
-web.route('/gracias')
-  .get((req, res) => res.render('thanks'))
-
 web.route('/faq')
   .get((req, res) => res.render('faq'))
 

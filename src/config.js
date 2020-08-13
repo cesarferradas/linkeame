@@ -33,8 +33,8 @@ config.cspOptions = {
   web: {
     directives: {
       defaultSrc: ["'self'", 'cdnjs.cloudflare.com'],
-      imgSrc: ["'self'", 'data:', 'www.paypal.com', 'www.paypalobjects.com'],
-      scriptSrc: ["'self'", 'www.paypal.com', 'www.paypalobjects.com'],
+      imgSrc: ["'self'", 'data:'],
+      scriptSrc: ["'self'"],
       styleSrc: ["'self'", 'cdnjs.cloudflare.com'],
     },
   },
@@ -92,7 +92,5 @@ config.referrerPolicy = {
 }
 
 if (config.env === 'production') {
-  config.csrfOptions.cookie.secure = true
   config.morgan.format = 'combined'
-  config.upgradeInsecureRequests = true
 }

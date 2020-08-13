@@ -6,22 +6,22 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 <url>
-  <loc>https://linkea.me/</loc>
+  <loc>http://linkea.me/</loc>
   <lastmod>2020-05-23T09:39:07+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://linkea.me/apoyo</loc>
+  <loc>http://linkea.me/apoyo</loc>
   <lastmod>2020-05-23T09:39:07+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://linkea.me/faq</loc>
+  <loc>http://linkea.me/faq</loc>
   <lastmod>2020-05-23T09:39:07+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://linkea.me/privacidad</loc>
+  <loc>http://linkea.me/privacidad</loc>
   <lastmod>2020-05-23T09:39:07+00:00</lastmod>
   <priority>0.80</priority>
 </url>
